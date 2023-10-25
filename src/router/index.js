@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/home/HomeView.vue'
 
 const routes = [
   {
@@ -8,12 +8,54 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/client',
+    name: 'client',
+    component: () => import('../views/client/AboutView.vue')
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: () => import('../views/admin/AdminView.vue')
+  },
+  {
+    path: '/sinais',
+    name: 'sinais',
+    component: () => import( '../views/admin/SinaisView.vue')
+  },
+  {
+    path: '/medicamentos',
+    name: 'medicamentos',
+    component: () => import( '../views/admin/MedicamentosView.vue')
+  },
+  {
+    path: '/cadastros',
+    name: 'cadastros',
+    component: () => import( '../views/client/CadastrosView.vue')
+  },
+  {
+    path: '/feedback',
+    name: 'feedback',
+    component: () => import( '../views/client/FeedbackView.vue')
+  },
+  {
+    path: '/desativar',
+    name: 'desativar',
+    component: () => import( '../views/admin/DesativarView.vue')
+  },
+  {
+    path: '/cadastroAdmin',
+    name: 'cadastroAdmin',
+    component: () => import( '../views/admin/CadastroAdminView.vue')
+  },
+  {
+    path: '/higieneAdmin',
+    name: 'higieneAdmin',
+    component: () => import( '../views/admin/HigieneView.vue')
+  },
+  {
+    path: '/operacaoAdmin',
+    name: 'operacaoAdmin',
+    component: () => import( '../views/admin/OperacaoView.vue')
   }
 ]
 
