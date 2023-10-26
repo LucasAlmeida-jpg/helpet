@@ -8,7 +8,7 @@
       </div>
       <div class="col">
         <router-link to="/medicamentos">
-          <h4>Registre Medicamentos</h4>
+          <h4>Registre Medicamentos dos Pets</h4>
         </router-link>
       </div>
       <div class="col">
@@ -33,20 +33,24 @@
           <h4>Desativar perfil de usuário</h4>
         </router-link>
       </div>
-      <div class="row">
-        <div class="col">
-          <router-link to="/listUser">
-            <h4>Usuários</h4>
-          </router-link>
-        </div>
-        <div class="col">
-          <router-link to="/pets">
-            <h4>Pets</h4>
-          </router-link>
-        </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <router-link to="/listUser">
+          <h4>Usuários</h4>
+        </router-link>
+      </div>
+      <div class="col">
+        <router-link to="/pets">
+          <h4>Informações dos Pets</h4>
+        </router-link>
+      </div>
+      <div class="col">
+        <router-link to="/feedbackAdmin">
+          <h4>FeedBack</h4>
+        </router-link>
       </div>
     </div>
-
   </div>
 </template>
 
