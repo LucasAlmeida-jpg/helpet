@@ -33,6 +33,18 @@
           <h4>Desativar perfil de usuário</h4>
         </router-link>
       </div>
+      <div class="row">
+        <div class="col">
+          <router-link to="/listUser">
+            <h4>Usuários</h4>
+          </router-link>
+        </div>
+        <div class="col">
+          <router-link to="/pets">
+            <h4>Pets</h4>
+          </router-link>
+        </div>
+      </div>
     </div>
 
   </div>

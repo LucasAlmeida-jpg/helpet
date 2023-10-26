@@ -125,6 +125,13 @@ nav {
   padding: 30px;
 }
 
+li {
+  list-style: none;
+  color: #14A9FF;
+  font-weight: bold;
+  margin: 20px;
+}
+
 a {
   text-decoration: none !important;
   color: white !important;
@@ -171,3 +178,24 @@ select {
   border-radius: 20px;
 }
 </style>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      users: [],
+    };
+  },
+  mounted() {
+    axios.get('api/v1/user')
+      .then(response => {
+        this.users = response.data.data;
+      })
+      .catch(error => {
+        console.error('Erro ao buscar usuários:', error);
+      });
+  },
+};
+</script>

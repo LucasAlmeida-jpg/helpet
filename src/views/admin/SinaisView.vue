@@ -2,6 +2,15 @@
   <div>
     <main class="container">
       <h2 class="offset-top-20 my-4">Gerenciamento dos Sinais Vitais</h2>
+      <div class="mb-5">
+        <select name="pet" id="pet">
+          <option value="">Selecione o Pet</option>
+          <option value="">Jonas</option>
+          <option value="">Celio</option>
+          <option value="">Robson</option>
+          <option value="">Percicles</option>
+        </select>
+      </div>
       <div class="card mb-3">
         <div class="card-body">
           <form class="text-left" id="vitalsForm">
@@ -11,7 +20,7 @@
               <small class="form-text text-muted" id="charCount">0/300 caracteres</small>
             </div>
             <div class="d-flex justify-content-center align-items-center">
-              <button type="submit" class="btn btn-primary">Salvar</button>
+              <button class="btn btn-primary">Salvar</button>
             </div>
           </form>
         </div>
@@ -23,7 +32,7 @@
 <script>
 </script>
 
-<style>
+<style scoped>
 #vitalsObservations {
   max-height: 125px;
   min-height: 100px;
@@ -48,5 +57,10 @@
 .btn-danger {
   border-radius: 50px;
 
+}
+
+select {
+  border: none !important;
+  font-size: 20px;
 }
 </style>

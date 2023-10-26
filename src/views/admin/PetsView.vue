@@ -1,0 +1,22 @@
+<template>
+  <div class="text-center">
+    <ul>
+      <li>PETS</li>
+      <li>PETS</li>
+      <li>PETS</li>
+      <li>PETS</li>
+      <li>PETS</li>
+      <li>PETS</li>
+      <li>PETS</li>
+      <li>PETS</li>
+      <li>PETS</li>
+      <li>PETS</li>
+      <li>PETS</li>
+      <li>PETS</li>
+      <li>PETS</li>
+      <li>PETS</li>
+      <li>PETS</li>
+      <li>PETS</li>
+    </ul>
+  </div>
+</template>
