@@ -22,23 +22,23 @@
         </div>
         <div class="modal-body">
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput">
+            <input type="text" class="form-control" id="floatingInput" v-model="name">
             <label for="floatingInput">Nome</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput">
+            <input type="text" class="form-control" id="floatingInput" v-model="cpf">
             <label for="floatingInput">CPF</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput">
+            <input type="text" class="form-control" id="floatingInput" v-model="endereco">
             <label for="floatingInput">Endereço</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput">
+            <input type="email" class="form-control" id="floatingInput" v-model="email">
             <label for="floatingInput">E-mail</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="floatingPassword">
+            <input type="password" class="form-control" id="floatingPassword" v-model="senha">
             <label for="floatingPassword">Senha</label>
           </div>
           <div class="form-floating mb-3">
@@ -47,8 +47,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <router-link to="/"><button type="button" class="btn btn-primary"
-              data-bs-dismiss="modal">Salvar</button></router-link>
+          <router-link to="/"><button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+              @click="createUSer()">Salvar</button></router-link>
           <router-link to="/"><button type="button" class="btn btn-secondary"
               data-bs-dismiss="modal">Cancelar</button></router-link>
         </div>
@@ -180,22 +180,40 @@ select {
 </style>
 
 <script>
-import axios from 'axios';
-
+import axios from '@/axiosDefault';
 export default {
   data() {
     return {
-      users: [],
+      user: '',
+      name: '',
+      cpf: '',
+      endereco: '',
+      email: '',
+      senha: '',
+
     };
   },
-  mounted() {
-    axios.get('api/v1/user')
-      .then(response => {
-        this.users = response.data.data;
-      })
-      .catch(error => {
-        console.error('Erro ao buscar usuários:', error);
-      });
-  },
+
+
+
+  methods: {
+    createUSer() {
+      var data = {
+        nome: this.name,
+        email: this.email,
+        password: this.senha,
+        cpf: this.cpf,
+        endereco: this.endereco,
+      }
+      axios.post('api/v1/user', data)
+        .then(response => {
+          this.user = response.data.data;
+          console.log(this.user);
+        })
+        .catch(error => {
+          console.error('Erro ao buscar usuários:', error);
+        });
+    }
+  }
 };
 </script>

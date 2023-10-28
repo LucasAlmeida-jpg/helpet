@@ -38,7 +38,7 @@ class HigieneController extends Controller
 
             return response()->json([
                 'data' => [
-                    'message' => 'Higiene cadastrada com sucesso!'
+                    $higiene 
                 ]
             ], 201);
 

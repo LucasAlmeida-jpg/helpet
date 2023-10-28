@@ -42,7 +42,11 @@ class PetController extends Controller
 
         try {
             $pet = new Pet;
+            $pet->nome = $data['nome'];
             $pet->raca_id = $data['raca'];
+            $pet->cpf_tutor = $data['cpf_tutor'];
+            $pet->nome_tutor = $data['nome_tutor'];
+            $pet->raca_pet = $data['raca_pet'];
             $pet->cor = $data['cor'];
             $pet->tipo = $data['tipo'];
             $pet->tamanho = $data['tamanho'];

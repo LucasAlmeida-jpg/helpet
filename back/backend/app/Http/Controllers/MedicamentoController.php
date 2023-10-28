@@ -38,7 +38,7 @@ class MedicamentoController extends Controller
 
             return response()->json([
                 'data' => [
-                    'message' => 'Medicamento cadastrada com sucesso!'
+                    $medicamento
                 ]
             ], 201);
 

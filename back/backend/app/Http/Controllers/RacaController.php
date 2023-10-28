@@ -38,7 +38,7 @@ class RacaController extends Controller
 
             return response()->json([
                 'data' => [
-                    'message' => 'Raca cadastrada com sucesso!'
+                    $raca
                 ]
             ], 201);
 

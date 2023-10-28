@@ -39,7 +39,7 @@ class OperacaoController extends Controller
 
             return response()->json([
                 'data' => [
-                    'message' => 'Operacao cadastrada com sucesso!'
+                    $operacao
                 ]
             ], 201);
 

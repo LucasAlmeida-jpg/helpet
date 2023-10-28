@@ -3,33 +3,67 @@
     <main class="container">
       <h2 class="offset-top-20 my-4">Gerenciamento dos Sinais Vitais</h2>
       <div class="mb-5">
-        <select name="pet" id="pet">
-          <option value="">Selecione o Pet</option>
-          <option value="">Jonas</option>
-          <option value="">Celio</option>
-          <option value="">Robson</option>
-          <option value="">Percicles</option>
-        </select>
       </div>
       <div class="card mb-3">
         <div class="card-body">
           <form class="text-left" id="vitalsForm">
             <div class="form-group">
-              <textarea class="form-control" id="vitalsObservations" name="message" maxlength="300"
+              <textarea v-model="description" class="form-control" id="vitalsObservations" name="message" maxlength="300"
                 placeholder="Digite as observações do pet (máximo de 300 caracteres)"></textarea>
               <small class="form-text text-muted" id="charCount">0/300 caracteres</small>
             </div>
             <div class="d-flex justify-content-center align-items-center">
-              <button class="btn btn-primary">Salvar</button>
+              <button class="btn btn-primary" @click="createSinais()">Salvar</button>
             </div>
           </form>
         </div>
+      </div>
+      <h1 class="mb-4">Descrições dos Pets
+      </h1>
+      <div v-for="(i, index) in sinais" :key="index">
+        <h4>{{ i.descricao }}</h4>
+        <hr>
       </div>
     </main>
   </div>
 </template>
 
 <script>
+import axios from '@/axiosDefault';
+export default {
+  data() {
+    return {
+      sinais: [],
+      description: '',
+    };
+  },
+
+  mounted() {
+    axios.get('api/v1/sinais')
+      .then(response => {
+        this.sinais = response.data.data;
+        console.log(this.sinais);
+      })
+      .catch(error => {
+        console.error('Erro ao buscar usuários:', error);
+      });
+  },
+
+  methods: {
+    createSinais() {
+      var data = {
+        descricao: this.description,
+      }
+      axios.post('api/v1/sinais', data)
+        .then(response => {
+          this.sinais = response.data.data;
+        })
+        .catch(error => {
+          console.error('Erro ao buscar usuários:', error);
+        });
+    }
+  }
+};
 </script>
 
 <style scoped>
