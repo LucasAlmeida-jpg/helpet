@@ -43,7 +43,7 @@ class PetController extends Controller
         try {
             $pet = new Pet;
             $pet->nome = $data['nome'];
-            $pet->raca_id = $data['raca'];
+            // $pet->raca_id = $data['raca'];
             $pet->cpf_tutor = $data['cpf_tutor'];
             $pet->nome_tutor = $data['nome_tutor'];
             $pet->raca_pet = $data['raca_pet'];
@@ -51,8 +51,8 @@ class PetController extends Controller
             $pet->tipo = $data['tipo'];
             $pet->tamanho = $data['tamanho'];
             $pet->sexo = $data['sexo'];
-            $pet->sinal_vital_id = $data['sinalVital'];
-            $pet->higiene_id = $data['higiene'];
+            // $pet->sinal_vital_id = $data['sinalVital'];
+            // $pet->higiene_id = $data['higiene'];
 
             $pet->save();
 

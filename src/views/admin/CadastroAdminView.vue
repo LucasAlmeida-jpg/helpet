@@ -17,16 +17,16 @@
     <div class="tab-content text-center" id="pills-tabContent">
       <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
         tabindex="0">
-        <form action="">
-          <input class="form-control" type="text" placeholder="Nome do Pet">
-          <input class="form-control" type="text" placeholder="Tipo do Pet">
-          <input class="form-control" type="text" placeholder="Tamanho do Pet">
-          <input class="form-control" type="text" placeholder="Sexo do Pet">
-          <input class="form-control" type="text" placeholder="Raca do Pet">
-          <input class="form-control" type="text" placeholder="Cor do Pet">
-          <input class="form-control" type="text" placeholder="CPF do Tutor">
-          <input class="form-control" type="text" placeholder="Nome do Tutor">
-          <button>Cadastrar</button>
+        <form>
+          <input class="form-control" v-model="pet.nome_pet" placeholder="Nome do Pet">
+          <input class="form-control" v-model="pet.tipo_pet" placeholder="Tipo do Pet">
+          <input class="form-control" v-model="pet.tamanho_pet" placeholder="Tamanho do Pet">
+          <input class="form-control" v-model="pet.sexo_pet" placeholder="Sexo do Pet">
+          <input class="form-control" v-model="pet.raca" placeholder="Raca do Pet">
+          <input class="form-control" v-model="pet.cor" placeholder="Cor do Pet">
+          <input class="form-control" v-model="pet.cpfTutor" placeholder="CPF do Tutor">
+          <input class="form-control" v-model="pet.nomeTutor" placeholder="Nome do Tutor">
+          <button @click.prevent="createPet()">Cadastrar</button>
         </form>
       </div>
       <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
@@ -66,3 +66,48 @@ button {
   padding: 10px;
 }
 </style>
+
+<script>
+import axios from '@/axiosDefault';
+
+export default {
+  data() {
+    return {
+      pet: {
+        nome_pet: '',
+        tipo_pet: '',
+        tamanho_pet: '',
+        sexo_pet: '',
+        raca: '',
+        cor: '',
+        cpfTutor: '',
+        nomeTutor: '',
+      },
+
+    };
+  },
+
+  methods: {
+    createPet() {
+      var petData = {
+        cor: this.pet.cor,
+        tipo: this.pet.tipo_pet,
+        tamanho: this.pet.tamanho_pet,
+        sexo: this.pet.sexo_pet,
+        raca_pet: this.pet.raca,
+        nome: this.pet.nome_pet,
+        cpf_tutor: this.pet.cpfTutor,
+        nome_tutor: this.pet.nomeTutor
+      };
+      axios.post('api/v1/pet', petData)
+        .then(response => {
+          console.log(response);
+          this.pet = response.data.data;
+        })
+        .catch(error => {
+          console.error('Erro ao criar pet:', error);
+        });
+    }
+  },
+};
+</script>

@@ -12,7 +12,7 @@
           <input class="form-control" v-model="pet.cor" placeholder="Cor do Pet">
           <input class="form-control" v-model="pet.cpfTutor" placeholder="CPF do Tutor">
           <input class="form-control" v-model="pet.nomeTutor" placeholder="Nome do Tutor">
-          <button @click="createPet()">Cadastrar aq</button>
+          <button @click.prevent="createPet()">Cadastrar</button>
         </form>
       </div>
     </div>
@@ -51,13 +51,15 @@ export default {
         cpf_tutor: this.pet.cpfTutor,
         nome_tutor: this.pet.nomeTutor
       };
-      axios.post(`/api/v1/pet/`, petData)
+      axios.post('api/v1/pet', petData)
         .then(response => {
+          console.log(response);
           this.pet = response.data.data;
         })
+        .catch(error => {
+          console.error('Erro ao criar pet:', error);
+        });
     }
-
-
   },
 };
 </script>

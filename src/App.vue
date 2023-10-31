@@ -189,8 +189,7 @@ export default {
       cpf: '',
       endereco: '',
       email: '',
-      senha: '',
-
+      senha: ''
     };
   },
 
