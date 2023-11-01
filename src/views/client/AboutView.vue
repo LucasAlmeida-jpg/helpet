@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .col {
   background: #14A9FF;
   margin: 10px;
@@ -28,5 +28,13 @@
   margin-bottom: 100px;
   cursor: pointer;
   color: white;
+  transition: transform 0.3s ease;
+
+
+
+  &:hover {
+    transform: scale(1.1);
+
+  }
 }
 </style>

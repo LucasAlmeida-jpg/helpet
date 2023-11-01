@@ -66,5 +66,11 @@
   cursor: pointer;
   color: white;
   max-width: 421px;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+
+  }
 }
 </style>
