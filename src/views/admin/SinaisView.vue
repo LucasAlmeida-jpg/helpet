@@ -18,10 +18,17 @@
           </form>
         </div>
       </div>
-      <h1 class="mb-4">Descrições dos Pets
+      <h1 class="my-5 text-center bg">Descrições dos Pets
       </h1>
       <div v-for="(i, index) in sinais" :key="index">
-        <h4>{{ i.descricao }}</h4>
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <h4>{{ i.descricao }}</h4>
+          </div>
+          <div>
+            <h4 class="date-info">{{ formatDateAndTime(i.created_at) }}</h4>
+          </div>
+        </div>
         <hr>
       </div>
     </main>
@@ -61,7 +68,15 @@ export default {
         .catch(error => {
           console.error('Erro ao buscar usuários:', error);
         });
-    }
+    },
+    formatDateAndTime(datetime) {
+      const date = new Date(datetime);
+      const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      const formattedTime = `${hours}:${minutes}`;
+      return `Data: ${formattedDate} Horário: ${formattedTime}`;
+    },
   }
 };
 </script>
@@ -71,6 +86,19 @@ export default {
   max-height: 125px;
   min-height: 100px;
 
+}
+
+.bg {
+  background: #14A9FF;
+  color: white;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.date-info {
+  font-size: 12px;
+  color: grey;
+  opacity: .7;
 }
 
 .logo {

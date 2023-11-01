@@ -67,11 +67,11 @@
         <div class="modal-body">
           <div class="form-floating mb-3">
             <input type="email" class="form-control" id="floatingInput">
-            <label for="floatingInput">E-mail</label>
+            <label for="floatingInput">E-mail (Cliente)</label>
           </div>
           <div class="form-floating mb-3">
             <input type="password" class="form-control" id="floatingPassword">
-            <label for="floatingPassword">Senha</label>
+            <label for="floatingPassword">Senha (Cliente)</label>
           </div>
         </div>
         <div class="modal-footer">
@@ -176,6 +176,8 @@ footer {
 input,
 select {
   border-radius: 20px;
+  width: 100%;
+  padding: 10px;
 }
 </style>
 

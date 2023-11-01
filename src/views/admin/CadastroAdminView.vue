@@ -6,10 +6,10 @@
           <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
             type="button" role="tab" aria-controls="pills-home" aria-selected="true">Cadastro Pets</button>
         </li>
-        <li class="nav-item" role="presentation">
+        <!-- <li class="nav-item" role="presentation">
           <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
-            type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Cadastro Clientes</button>
-        </li>
+            type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Cadastro de pet Clientes</button>
+        </li> -->
       </ul>
     </div>
   </div>
@@ -83,6 +83,13 @@ export default {
         cpfTutor: '',
         nomeTutor: '',
       },
+
+      petClient: {
+        nome_pet_client: '',
+        email_client: '',
+        telefone_client: '',
+        data_client: '',
+      }
 
     };
   },
