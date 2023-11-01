@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Higiene;
 
-
 class HigieneController extends Controller
 {
     /**
@@ -13,8 +12,14 @@ class HigieneController extends Controller
      */
     public function index()
     {
-        $higiene = new Higiene;
-        return response()->json($higiene->paginate('10'), 200);
+        try {
+            $higiene = Higiene::select('id', 'ultimar', 'proxr', 'cuidados', 'created_at', 'updated_at', 'type_care', 'type_animal')->paginate(10);
+
+            return response()->json(['data' => $higiene], 200);
+        } catch (\Throwable $th) {
+            \Log::error($th->getMessage());
+            return response()->json(['message' => $th->getMessage()], 500);
+        }
     }
 
     /**
@@ -30,15 +35,22 @@ class HigieneController extends Controller
      */
     public function store(Request $request)
     {
-        $data  = $request->all();
+        $data = $request->all();
 
         try {
             $higiene = new Higiene;
-            $higiene = $higiene->create($data);
+            $higiene->ultimar = $data['ultimar'];
+            $higiene->proxr = $data['proxr'];
+            $higiene->cuidados = $data['cuidados'];
+            $higiene->type_care = $data['type_care'];
+            $higiene->type_animal = $data['type_animal'];
+            $higiene->pet_name = $data['pet_name'];
+
+            $higiene->save();
 
             return response()->json([
                 'data' => [
-                    $higiene 
+                    $higiene
                 ]
             ], 201);
 
@@ -79,10 +91,10 @@ class HigieneController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data  = $request->all();
-        
+        $data = $request->all();
+
         try {
-            
+
             $higiene = Higiene::findOrFail($id);
             $higiene->update($data);
 
@@ -105,7 +117,7 @@ class HigieneController extends Controller
     {
         try {
             $higiene = Higiene::findOrFail($id);
-            $higiene->delete($data);
+            $higiene->delete();
 
             return response()->json([
                 'data' => [

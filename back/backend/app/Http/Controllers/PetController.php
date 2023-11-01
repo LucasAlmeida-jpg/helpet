@@ -12,18 +12,14 @@ class PetController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
-    {
-        $session = Session::with('user')->where('user_id', $request->user_id)->get();
+    public function index()
+{
+    $pets = Pet::all(); // Recupera todos os pets
 
-        if (!$session[0]->status) {
-            return 'negado';
-        }
-
-
-        $pet = Pet::with(['raca', 'medicamento']);
-        return response()->json($pet->paginate('10'), 200);
-    }
+    return response()->json([
+        'data' => $pets
+    ], 200);
+}
 
     /**
      * Show the form for creating a new resource.
@@ -43,7 +39,6 @@ class PetController extends Controller
         try {
             $pet = new Pet;
             $pet->nome = $data['nome'];
-            // $pet->raca_id = $data['raca'];
             $pet->cpf_tutor = $data['cpf_tutor'];
             $pet->nome_tutor = $data['nome_tutor'];
             $pet->raca_pet = $data['raca_pet'];
@@ -51,8 +46,7 @@ class PetController extends Controller
             $pet->tipo = $data['tipo'];
             $pet->tamanho = $data['tamanho'];
             $pet->sexo = $data['sexo'];
-            // $pet->sinal_vital_id = $data['sinalVital'];
-            // $pet->higiene_id = $data['higiene'];
+            
 
             $pet->save();
 

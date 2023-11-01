@@ -30,23 +30,27 @@ class MedicamentoController extends Controller
      */
     public function store(Request $request)
     {
-        $data  = $request->all();
-
+        $data = $request->all();
+    
         try {
             $medicamento = new Medicamento;
-            $medicamento = $medicamento->create($data);
-
+            $medicamento->nome = $data['nome'];
+            $medicamento->dose = $data['dose'];
+            $medicamento->hora_de_aplicação = $data['hora_de_aplicação'];
+            $medicamento->nome_pet = $data['nome_pet']; 
+            $medicamento->tipo_pet = $data['tipo_pet']; 
+            $medicamento->save();
+    
             return response()->json([
-                'data' => [
-                    $medicamento
-                ]
+                'data' => $medicamento
             ], 201);
-
+    
         } catch (\Throwable $th) {
             \Log::error('Erro ao criar Medicamento: ' . $th->getMessage());
             return response()->json(['message' => $th->getMessage()], 500);
         }
     }
+    
 
     /**
      * Display the specified resource.

@@ -12,8 +12,9 @@ class SessionController extends Controller
      */
     public function index()
     {
-        $session = new Session;
-        return response()->json($session->paginate('10'), 200);
+        $sessions = Session::paginate(10); // Retorna uma lista paginada de sessões
+
+    return response()->json($sessions, 200);
     }
 
     /**
