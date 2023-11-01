@@ -1,17 +1,16 @@
 <template>
   <div class="text-center">
     <div class="container">
-      <div class="row row-cols-2 d-flex justify-content-center">
-        <div class="col-5 card-users" v-for="(u, index) in users" :key="index">
+      <div class="row row-cols-2 d-flex justify-content-between">
+        <div class="col-3 card-users" v-for="(u, index) in users" :key="index">
           <div>
             <img src="@/assets/user.png" alt="">
           </div>
           <div>
-            <div>Nome: {{ u.nome }}</div>
-            <div>E-mail: {{ u.email }}</div>
-            <div>CPF: {{ formatCPF(u.cpf) }}</div>
-            <div>Endereço: {{ u.endereco }}</div>
-            <div>{{ u.pets.name }}</div>
+            <div class="info-user">Nome: {{ u.nome }}</div>
+            <div class="info-user">E-mail: {{ u.email }}</div>
+            <div class="info-user">CPF: {{ formatCPF(u.cpf) }}</div>
+            <div class="info-user">Endereço: {{ u.endereco }}</div>
           </div>
         </div>
       </div>
@@ -56,17 +55,37 @@ export default {
 <style lang="scss" scoped>
 .card-users {
   margin: 10px;
-  border: 5px solid black;
+  box-shadow: inset;
   padding: 30px 10px;
   font-weight: bold;
   color: black;
   font-size: 20px;
   justify-content: center;
   border-radius: 12px;
+  transition: transform 0.3s ease;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0.8;
+
 
   img {
     width: 80px;
     object-fit: cover;
   }
+
+
+  &:hover {
+    transform: scale(1.1);
+
+  }
+
+  .info-user {
+    background: rgb(5, 175, 242);
+    margin: 5px;
+    color: white;
+    padding: 8px 0px;
+    border-radius: 40px;
+  }
 }
 </style>
+
