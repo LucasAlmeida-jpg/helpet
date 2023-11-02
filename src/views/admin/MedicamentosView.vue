@@ -20,55 +20,56 @@
           </div>
           <div class="modal-body">
             <div>
-              <label for="med">Seu pet toma medicações</label>
-              <select id="med" class="form-select" v-model="novoMedicamento.petMedications">
-                <option value="Sim">Sim</option>
-                <option value="Não">Não</option>
-              </select>
+              <label for="med">Nome do Pet</label>
+              <input id="med" v-model="novoMedicamento.petMedications">
             </div>
             <div class="my-3">
               <label for="pet">Tipo de Pet</label>
-              <select id="pet" class="form-select" v-model="novoMedicamento.petType">
-                <option value="Cachorro">Cachorro</option>
-                <option value="Gatos">Gatos</option>
-                <option value="Outros">Outros</option>
-              </select>
+              <input id="pet" v-model="novoMedicamento.petType">
             </div>
-            <input class="form-control" type="text" v-model="novoMedicamento.medicationName"
-              placeholder="Nome do medicamento">
-            <input class="form-control mt-3" type="text" v-model="novoMedicamento.dosage" placeholder="Dosagem">
+
+            <div class="my-3">
+              <label for="pet">Horário da aplicacao</label>
+              <input id="pet" v-model="novoMedicamento.timeAplication">
+            </div>
+            <label for="medicamento">Nome do medicamento</label>
+            <input id="medicamento" type="text" v-model="novoMedicamento.medicationName">
+
+            <div class="mt-3">
+              <label for="name">Dosagem</label>
+              <input id="name" type="text" v-model="novoMedicamento.dosage">
+            </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" @click="registrarMedicamento">Registrar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-primary" @click="registrarMedicamento"
+              data-bs-dismiss="modal">Registrar</button>
           </div>
         </div>
       </div>
     </div>
     <div class="mt-4 text-center info container">
-      <table class="table mt-5">
-        <thead>
-          <tr>
-            <th scope="col">Seu pet toma medicações</th>
-            <th scope="col">Tipo de Pet</th>
-            <th scope="col">Nome do medicamento</th>
-            <th scope="col">Dosagem</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(medicamento, index) in medicamentos" :key="index">
-            <td>{{ medicamento.petMedications }}</td>
-            <td>{{ medicamento.petType }}</td>
-            <td>{{ medicamento.medicationName }}</td>
-            <td>{{ medicamento.dosage }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="row row-cols-2 d-flex justify-content-between">
+        <div class="medication-info col-3 card-users" v-for="(medicamento, index) in medicamentos" :key="index">
+          <div>
+            <img src="@/assets/animal.png" alt="">
+          </div>
+          <div>
+            <div>Nome do Pet: {{ medicamento.nome_pet }} </div>
+            <div>Medicamento: {{ medicamento.nome }} </div>
+            <div>Dose: {{ medicamento.dose }}</div>
+            <div>Horário da Aplicação : {{ medicamento.hora_de_aplicação }}</div>
+            <div>Tipo do Pet : {{ medicamento.tipo_pet }}</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from '@/axiosDefault';
+
 export default {
   data() {
     return {
@@ -77,38 +78,79 @@ export default {
         petMedications: '',
         petType: '',
         medicationName: '',
+        timeAplication: '',
         dosage: '',
       },
     };
   },
-  methods: {
-    registrarMedicamento() {
-      this.medicamentos.push({ ...this.novoMedicamento });
 
-      this.novoMedicamento = {
-        petMedications: '',
-        petType: '',
-        medicationName: '',
-        dosage: '',
-      };
-    },
+  mounted() {
+    axios.get('api/v1/medicamento')
+      .then(response => {
+        this.medicamentos = response.data.data;
+      })
+      .catch(error => {
+        console.error('Erro ao buscar usuários:', error);
+      });
   },
+
+  methods: {
+
+    registrarMedicamento() {
+
+      var medData = {
+        nome_pet: this.novoMedicamento.petMedications,
+        tipo_pet: this.novoMedicamento.petType,
+        nome: this.novoMedicamento.medicationName,
+        dose: this.novoMedicamento.dosage,
+        hora_de_aplicação: '2023-11-01 ' + this.novoMedicamento.timeAplication + ':00'
+      };
+      axios.post('api/v1/medicamento', medData)
+        .then(response => {
+          this.medicamentos = response.data.data;
+        })
+
+    }
+  }
+
+
 };
 </script>
 
-<style>
-th,
-td {
-  color: #14A9FF;
-}
+<style lang="scss" scoped>
+.medication-info {
+  margin: 10px;
+  box-shadow: inset;
+  padding: 30px 10px;
+  font-weight: bold;
+  color: black;
+  font-size: 20px;
+  justify-content: center;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0.8;
 
-thead {
-  border: 1px solid #14A9FF;
-  border-radius: 92px !important;
-}
 
-tbody {
-  border: 1px solid #14A9FF;
-  margin-top: 20px 90px;
+  img {
+    width: 80px;
+    object-fit: cover;
+  }
+
+
+  &:hover {
+    transform: scale(1.1);
+
+  }
+
+  .info-user {
+    background: rgb(5, 175, 242);
+    margin: 5px;
+    color: white;
+    padding: 8px 0px;
+    border-radius: 40px;
+  }
 }
 </style>
+

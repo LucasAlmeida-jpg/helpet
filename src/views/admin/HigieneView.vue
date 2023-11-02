@@ -6,7 +6,7 @@
       </div>
       <div>
         <button data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Adicionar Higiente
+          Registrar
         </button>
       </div>
     </div>
@@ -15,109 +15,149 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar Higiente</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Gerenciamento de Higiente dos Pets</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div>
-              <label for="med">Selecione o tipo de cuidado</label>
-              <select id="med" class="form-select" v-model="novaHigiene.petMedications">
-                <option value="Banho">Banho</option>
-                <option value="Tosa">Tosa</option>
-                <option value="Hidratacao">Hidratacao</option>
-                <option value="Outros">Outros</option>
-              </select>
+              <label for="med">Tipo de cuidado</label>
+              <input id="med" v-model="novaHigiene.typeCare">
             </div>
-            <div class="my-3">
-              <label for="pet">Selecione o Tipo do Pet</label>
-              <select id="pet" class="form-select" v-model="novaHigiene.petType">
-                <option value="Cachorro">Cachorro</option>
-                <option value="Gatos">Gatos</option>
-                <option value="Outros">Outros</option>
-              </select>
-            </div>
-            <input class="form-control" type="date" v-model="novaHigiene.medicationName"
-              placeholder="Nome do medicamento">
-            <input class="form-control mt-3" type="date" v-model="novaHigiene.dosage" placeholder="Dosagem">
 
-            <textarea class="form-control mt-4" id="" cols="30" rows="4" v-model="novaHigiene.obs"
-              placeholder="Observação"></textarea>
+            <div class="my-3">
+              <label for="pet">Nome de Pet</label>
+              <input id="pet" v-model="novaHigiene.petName">
+            </div>
+
+            <div class="my-3">
+              <label for="pet">Tipo de Pet</label>
+              <input id="pet" v-model="novaHigiene.petType">
+            </div>
+
+            <div class="my-3">
+              <label for="pet">Qual foi a última vez que o pet fez o procedimento?</label>
+              <input id="pet" type="date" v-model="novaHigiene.actualTime">
+            </div>
+            <label for="medicamento">Data atual do procedimento</label>
+            <input id="medicamento" type="date" v-model="novaHigiene.lastTime">
+
+            <div class="mt-3">
+              <label for="name">Observacao</label>
+              <input id="name" type="text" v-model="novaHigiene.obs">
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            <button type="button" class="btn btn-primary" @click="registrarMedicamento">Registrar</button>
+            <button type="button" class="btn btn-primary" @click="registrarHigiene"
+              data-bs-dismiss="modal">Registrar</button>
           </div>
         </div>
       </div>
     </div>
     <div class="mt-4 text-center info container">
-      <table class="table mt-5">
-        <thead>
-          <tr>
-            <th scope="col">Tipo de Cuidado </th>
-            <th scope="col">Tipo de Pet</th>
-            <th scope="col">Última Realização </th>
-            <th scope="col">Próxima Realização</th>
-            <th scope="col">Observações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(medicamento, index) in higiene" :key="index">
-            <td>{{ medicamento.petMedications }}</td>
-            <td>{{ medicamento.petType }}</td>
-            <td>{{ medicamento.medicationName }}</td>
-            <td>{{ medicamento.dosage }}</td>
-            <td>{{ medicamento.obs }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="row row-cols-2 d-flex justify-content-between">
+        <div class="medication-info col-3 card-users" v-for="(h, index) in higienes" :key="index">
+          <div>
+            <img src="@/assets/animal.png" alt="">
+          </div>
+          <div>
+            <div>Nome do Pet: {{ h.pet_name }} </div>
+            <div>Tipo do Pet: {{ h.type_animal }} </div>
+            <div>Tipo de cuidado: {{ h.type_care }} </div>
+            <div>Observação {{ h.cuidados }} </div>
+            <div>Data do ultimo procedimento? {{ h.ultimar }} </div>
+            <div>Data do atual procedimento? {{ h.proxr }} </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from '@/axiosDefault';
+
 export default {
   data() {
     return {
-      higiene: [],
+      higienes: [],
       novaHigiene: {
-        petMedications: '',
+        typeCare: '',
         petType: '',
-        medicationName: '',
-        dosage: '',
+        lastTime: '',
+        actualTime: '',
         obs: '',
+        petName: '',
       },
     };
   },
-  methods: {
-    registrarMedicamento() {
-      this.higiene.push({ ...this.novaHigiene });
 
-      this.novaHigiene = {
-        petMedications: '',
-        petType: '',
-        medicationName: '',
-        dosage: '',
-        obs: '',
-      };
-    },
+  mounted() {
+    axios.get('api/v1/higiene')
+      .then(response => {
+        this.higienes = response.data.data.data;
+      })
+      .catch(error => {
+        console.error('Erro ao buscar usuários:', error);
+      });
   },
+
+  methods: {
+
+    registrarHigiene() {
+      var medData = {
+        type_care: this.novaHigiene.typeCare,
+        type_animal: this.novaHigiene.petType,
+        ultimar: this.novaHigiene.lastTime,
+        proxr: this.novaHigiene.actualTime,
+        cuidados: this.novaHigiene.obs,
+        pet_name: this.novaHigiene.petName,
+      };
+      axios.post('api/v1/higiene', medData)
+        .then(response => {
+          this.higienes = response.data.data;
+        })
+    }
+  }
+
+
 };
 </script>
 
-<style>
-th,
-td {
-  color: #14A9FF;
-}
+<style lang="scss" scoped>
+.medication-info {
+  margin: 10px;
+  box-shadow: inset;
+  padding: 30px 10px;
+  font-weight: bold;
+  color: black;
+  font-size: 20px;
+  justify-content: center;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0.8;
 
-thead {
-  border: 1px solid #14A9FF;
-  border-radius: 92px !important;
-}
 
-tbody {
-  border: 1px solid #14A9FF;
-  margin-top: 20px 90px;
+  img {
+    width: 80px;
+    object-fit: cover;
+  }
+
+
+  &:hover {
+    transform: scale(1.1);
+
+  }
+
+  .info-user {
+    background: rgb(5, 175, 242);
+    margin: 5px;
+    color: white;
+    padding: 8px 0px;
+    border-radius: 40px;
+  }
 }
 </style>
+

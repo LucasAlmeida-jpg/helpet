@@ -37,7 +37,7 @@
     <div class="row">
       <div class="col">
         <router-link to="/listUser">
-          <h4>Usuários</h4>
+          <h4>Usuários Cadastrados</h4>
         </router-link>
       </div>
       <div class="col">

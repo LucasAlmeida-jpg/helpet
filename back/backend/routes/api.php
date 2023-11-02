@@ -29,6 +29,7 @@ Route::resource('v1/raca', RacaController::class);
 Route::resource('v1/sinais', SinalVitalController::class);
 Route::resource('v1/user', UserController::class);
 Route::resource('v1/session', SessionController::class);
+Route::resource('v1/feedback', FeedbackController::class);
 
 
 

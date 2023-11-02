@@ -45,7 +45,7 @@ class PetController extends Controller
             $pet->cor = $data['cor'];
             $pet->tipo = $data['tipo'];
             $pet->tamanho = $data['tamanho'];
-            $pet->sexo = $data['sexo'];
+            $pet->sexo = $data['sexo'];           
             
 
             $pet->save();

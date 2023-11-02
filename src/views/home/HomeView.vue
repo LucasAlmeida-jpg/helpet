@@ -14,6 +14,11 @@
         <img src="@/assets/capa-helpet.png" alt="capa">
       </div>
     </header>
+
+
+    <ul>
+      <li>Admin (Gerenciamento de Higiente dos Pets)</li>
+    </ul>
   </div>
 </template>
 

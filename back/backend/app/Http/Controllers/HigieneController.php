@@ -6,10 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Higiene;
 
 class HigieneController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
+{  
     public function index()
     {
         try {
