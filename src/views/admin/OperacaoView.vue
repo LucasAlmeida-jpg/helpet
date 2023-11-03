@@ -3,7 +3,7 @@
     <div class="row">
       <div>
         <label for="pet">Nome do Pet?</label>
-        <input v-model="novaOperacao.pet" class="form-control" id="pet" type="text"
+        <input v-model="novaOperacao.pet_name" class="form-control" id="pet" type="text"
           placeholder="Qual é o Pet? (Cachorro, gato...)">
       </div>
       <div class="mt-4">
@@ -27,28 +27,49 @@
     </div>
     <h1 class="text-center my-5">Lista de operações</h1>
     <div v-for="(o, index) in operacoes" :key="index">
-      <div>
-        <p>Procedimento: <span v-if="!o.editing">{{ o.procedimento }}</span>
-          <input v-if="o.editing" v-model="o.procedimento" class="form-control" type="text">
-        </p>
-      </div>
-      <div>
-        <p>Status: <span v-if="!o.editing">{{ o.status }}</span>
-          <input v-if="o.editing" v-model="o.status" class="form-control" type="text">
-        </p>
-      </div>
-      <div>
-        <p>Nome do tutor: <span v-if="!o.editing">{{ o.tutor }}</span>
-          <input v-if="o.editing" v-model="o.tutor" class="form-control" type="text">
-        </p>
-      </div>
-      <div>
-        <p>Data de criação desta operação: {{ formatDate(o.created_at) }}</p>
-      </div>
-      <div>
-        <button @click="editarOperacao(o)" v-if="!o.editing">Editar</button>
-        <button @click="salvarEdicao(o)" v-if="o.editing">Salvar</button>
-        <button @click="excluirOperacao(index)" class="ms-4">Excluir</button>
+      <div class="container">
+        <div class="row  d-flex justify-content-between">
+          <div class="col">
+            <div class="form-control mb-3 p-3">
+              <div>
+                <p>Nome do Pet: <span v-if="!o.editing">{{ o.pet_name }}</span>
+                  <input v-if="o.editing" v-model="o.pet_name" class="form-control" type="text">
+                </p>
+              </div>
+              <div>
+                <p>Procedimento: <span v-if="!o.editing">{{ o.procedimento }}</span>
+                  <input v-if="o.editing" v-model="o.procedimento" class="form-control" type="text">
+                </p>
+              </div>
+              <div>
+                <p>Status: <span v-if="!o.editing">{{ o.status }}</span>
+                  <input v-if="o.editing" v-model="o.status" class="form-control" type="text">
+                </p>
+              </div>
+              <div>
+                <p>Nome do tutor: <span v-if="!o.editing">{{ o.name_tutor }}</span>
+                  <input v-if="o.editing" v-model="o.name_tutor" class="form-control" type="text">
+                </p>
+              </div>
+              <div>
+                <p>Data de criação desta operação: {{ formatDate(o.created_at) }}</p>
+              </div>
+              <div>
+                <p>Data de modificação desta operação: {{ formatDate(o.update_at) }}</p>
+              </div>
+              <hr>
+              <div class="d-flex align-items-center justify-content-between">
+                <div>
+                  <button @click="editarOperacao(o)" v-if="!o.editing">Editar</button>
+                  <button @click="salvarEdicao(o)" v-if="o.editing">Salvar</button>
+                </div>
+                <div>
+                  <button @click="excluirOperacao(index)">Excluir</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -62,7 +83,7 @@ export default {
     return {
       operacoes: [],
       novaOperacao: {
-        pet: '',
+        pet_name: '',
         tutor: '',
         status: '',
         procedimento: '',
@@ -91,7 +112,7 @@ export default {
 
     registrarOp() {
       var opData = {
-        pet_name: this.novaOperacao.pet,
+        pet_name: this.novaOperacao.pet_name,
         name_tutor: this.novaOperacao.tutor,
         status: this.novaOperacao.status,
         procedimento: this.novaOperacao.procedimento,
@@ -100,7 +121,7 @@ export default {
         .then(() => {
           this.carregarOperacoes();
           this.novaOperacao = {
-            pet: '',
+            pet_name: '',
             tutor: '',
             status: '',
             procedimento: '',
@@ -118,16 +139,15 @@ export default {
     salvarEdicao(operacao) {
       operacao.editing = false;
 
-      const opData = {
+      var opData = {
         pet_name: operacao.pet_name,
-        name_tutor: operacao.name_tutor,
+        tutor: operacao.name_tutor,
         status: operacao.status,
         procedimento: operacao.procedimento,
       };
 
       axios.put(`api/v1/operacao/${operacao.id}`, opData)
         .then(() => {
-
           this.carregarOperacoes();
         })
         .catch(error => {
