@@ -29,25 +29,54 @@ class OperacaoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $data  = $request->all();
+    /**
+ * Store a newly created resource in storage.
+ */
+public function store(Request $request)
+{
+    $data  = $request->all();
 
-        try {
-            $operacao = new Operacao;
-            $operacao = $operacao->create($data);
+    try {
+        $operacao = new Operacao;
 
-            return response()->json([
-                'data' => [
-                    $operacao
-                ]
-            ], 201);
-
-        } catch (\Throwable $th) {
-            \Log::error('Erro ao criar Operacao: ' . $th->getMessage());
-            return response()->json(['message' => $th->getMessage()], 500);
+        if ($request->has('pet_name')) {
+            $operacao->pet_name = $data['pet_name'];
+        } else {
+            return response()->json(['message' => 'Campo "pet_name" não encontrado na requisição.'], 400);
         }
+
+        if ($request->has('name_tutor')) {
+            $operacao->name_tutor = $data['name_tutor'];
+        } else {
+            return response()->json(['message' => 'Campo "name_tutor" não encontrado na requisição.'], 400);
+        }
+
+        if ($request->has('status')) {
+            $operacao->status = $data['status'];
+        } else {
+            return response()->json(['message' => 'Campo "status" não encontrado na requisição.'], 400);
+        }
+
+        if ($request->has('procedimento')) {
+            $operacao->procedimento = $data['procedimento'];
+        } else {
+            return response()->json(['message' => 'Campo "procedimento" não encontrado na requisição.'], 400);
+        }
+
+        $operacao->save();
+        
+        return response()->json([
+            'data' => [
+                $operacao
+            ]
+        ], 201);
+
+    } catch (\Throwable $th) {
+        \Log::error('Erro ao criar Operacao: ' . $th->getMessage());
+        return response()->json(['message' => $th->getMessage()], 500);
     }
+}
+
 
     /**
      * Display the specified resource.
@@ -85,7 +114,12 @@ class OperacaoController extends Controller
         try {
             
             $operacao = Operacao::findOrFail($id);
-            $operacao->update($data);
+            $operacao->update([
+                'pet_name' => $request->input('pet_name'),
+                'name_tutor' => $request->input('name_tutor'),
+                'status' => $request->input('status'),
+                'procedimento' => $request->input('procedimento'),
+            ]);
 
             return response()->json([
                 'data' => [
@@ -106,17 +140,18 @@ class OperacaoController extends Controller
     {
         try {
             $operacao = Operacao::findOrFail($id);
-            $operacao->delete($data);
-
+            $operacao->delete();
+    
             return response()->json([
                 'data' => [
-                    'message' => 'Operacao deletado com sucesso!'
+                    'message' => 'Operacao deletada com sucesso!'
                 ]
             ], 200);
-
+    
         } catch (\Throwable $th) {
             \Log::error('Erro ao deletar Operacao: ' . $th->getMessage());
             return response()->json(['message' => $th->getMessage()], 500);
         }
     }
+    
 }

@@ -111,10 +111,10 @@
   </div>
 
   <router-view />
-
-  <!-- <footer class="text-center">
+  <!-- 
+  <footer class="text-center">
     <div class="container-fluid d-flex align-items-center justify-content-center">
-      <div><img src="../src/assets/helpet.png" alt=""></div>
+      <div><img src="../src/assets/helpet.png" class="logo" alt=""></div>
     </div>
   </footer> -->
 </template>
@@ -127,7 +127,7 @@ nav {
 
 li {
   list-style: none;
-  color: #14A9FF;
+  color: #9757FF;
   font-weight: bold;
   margin: 20px;
 }
@@ -138,11 +138,11 @@ a {
 }
 
 h3 {
-  color: #14A9FF;
+  color: #9757FF;
 }
 
 button {
-  background: #14A9FF;
+  background: #9757FF;
   border: none;
   padding: 6px 20px;
   color: white;
@@ -152,11 +152,11 @@ button {
 }
 
 footer {
-  background-color: #14A9FF;
-  padding: 80px 100px;
-
-  position: absolute;
+  background-color: #9757FF;
+  padding: 40px 100px;
+  position: fixed;
   bottom: 0;
+  width: 100%;
 
 }
 
@@ -165,7 +165,7 @@ footer {
 }
 
 .logo {
-  justify-content: center;
+
   width: 200px;
   background: white;
   border-radius: 30px;

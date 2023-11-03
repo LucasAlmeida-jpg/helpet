@@ -58,7 +58,7 @@ export default {
   box-shadow: inset;
   padding: 30px 10px;
   font-weight: bold;
-  color: black;
+  color: #9757FF;
   font-size: 20px;
   justify-content: center;
   border-radius: 12px;
@@ -80,7 +80,7 @@ export default {
   }
 
   .info-user {
-    background: rgb(5, 175, 242);
+    background: #9757FF;
     margin: 5px;
     color: white;
     padding: 8px 0px;

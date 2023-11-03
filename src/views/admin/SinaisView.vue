@@ -89,7 +89,7 @@ export default {
 }
 
 .bg {
-  background: #14A9FF;
+  background: #9757FF;
   color: white;
   border-radius: 12px;
   padding: 20px;
@@ -111,7 +111,7 @@ export default {
 .btn-primary {
   padding: 12px 30px;
   border-radius: 50px;
-  background-color: #14A9FF !important;
+  background-color: #9757FF !important;
   border: none;
   font-weight: 700;
 }

@@ -1,127 +1,150 @@
 <template>
   <div class="container">
-    <h1 class="text-center my-5">Inserir operações</h1>
-    <form @submit.prevent="submitOperation">
-      <div class="pt-5 text-center">
-        <span class="me-3">Pet *</span>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" v-model="petType" value="Cachorro">
-          <label class="form-check-label" for="cachorro">Cachorro</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" v-model="petType" value="Gato">
-          <label class="form-check-label" for="gato">Gato</label>
-        </div>
+    <div class="row">
+      <div>
+        <label for="pet">Nome do Pet?</label>
+        <input v-model="novaOperacao.pet" class="form-control" id="pet" type="text"
+          placeholder="Qual é o Pet? (Cachorro, gato...)">
       </div>
-      <div class="d-flex justify-content-center my-5">
-        <div class="form-floating mb-3">
-          <input type="date" class="form-control" v-model="data" required>
-          <label for="data">Data</label>
-        </div>
-        <div class="form-floating mx-5">
-          <input class="form-control" v-model="horario" required>
-          <label for="horario">Horário</label>
-        </div>
-        <div class="form-floating">
-          <select class="form-select" v-model="status" required>
-            <option value="" disabled selected>Selecione</option>
-            <option value="Concluído">Concluído</option>
-            <option value="Em Andamento">Em Andamento</option>
-            <option value="Cancelado">Cancelado</option>
-          </select>
-          <label for="status">Status</label>
-        </div>
-        <div class="form-floating mx-5">
-          <input class="form-control" v-model="procedimento" required>
-          <label for="procedimento">Nome do Procedimento</label>
-        </div>
+      <div class="mt-4">
+        <label for="tutor">Nome do tutor</label>
+        <input v-model="novaOperacao.tutor" class="form-control" id="tutor" type="text"
+          placeholder="Digite o nome do Tutor">
       </div>
-      <div class="form-floating mt-5 d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary mt-4">Inserir operações</button>
+      <div class="mt-4">
+        <label for="status">Qual o status do procedimento?</label>
+        <input v-model="novaOperacao.status" class="form-control" id="status" type="text"
+          placeholder="Status do procedimento">
       </div>
-    </form>
-
-    <h1 class="text-center my-5">Lista de Operações</h1>
-    <table class="table">
-      <thead>
-        <th>Pet</th>
-        <th>Status do Processo</th>
-        <th>Nome do Procedimento</th>
-        <th>Data e Horário</th>
-        <th>Ações</th>
-      </thead>
-      <tbody>
-        <tr v-for="(operation, index) in operations" :key="index">
-          <td>{{ operation.petType }}</td>
-          <td>{{ operation.status }}</td>
-          <td>{{ operation.procedimento }}</td>
-          <td>{{ operation.data }} - {{ operation.horario }}</td>
-          <td>
-            <button class="btn btn-primary btn-sm" @click="updateStatus(index)">Atualizar Status</button>
-            <button class="btn btn-primary btn-sm" @click="updateHorario(index)">Atualizar Horário</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <div class="mt-4">
+        <label for="procedimento">Qual é o procedimento?</label>
+        <input v-model="novaOperacao.procedimento" class="form-control" id="procedimento" type="text"
+          placeholder="Procedimento">
+      </div>
+      <div class="form-floating mt-3 d-flex justify-content-center">
+        <button type="submit" class="mt-4" @click="registrarOp()">Inserir operações</button>
+      </div>
+    </div>
+    <h1 class="text-center my-5">Lista de operações</h1>
+    <div v-for="(o, index) in operacoes" :key="index">
+      <div>
+        <p>Procedimento: <span v-if="!o.editing">{{ o.procedimento }}</span>
+          <input v-if="o.editing" v-model="o.procedimento" class="form-control" type="text">
+        </p>
+      </div>
+      <div>
+        <p>Status: <span v-if="!o.editing">{{ o.status }}</span>
+          <input v-if="o.editing" v-model="o.status" class="form-control" type="text">
+        </p>
+      </div>
+      <div>
+        <p>Nome do tutor: <span v-if="!o.editing">{{ o.tutor }}</span>
+          <input v-if="o.editing" v-model="o.tutor" class="form-control" type="text">
+        </p>
+      </div>
+      <div>
+        <p>Data de criação desta operação: {{ formatDate(o.created_at) }}</p>
+      </div>
+      <div>
+        <button @click="editarOperacao(o)" v-if="!o.editing">Editar</button>
+        <button @click="salvarEdicao(o)" v-if="o.editing">Salvar</button>
+        <button @click="excluirOperacao(index)" class="ms-4">Excluir</button>
+      </div>
+    </div>
   </div>
 </template>
-
 <script>
+import axios from '@/axiosDefault';
+import moment from 'moment';
+
 export default {
   data() {
     return {
-      petType: "Cachorro",
-      data: "",
-      horario: "",
-      status: "",
-      procedimento: "",
-      operations: []
+      operacoes: [],
+      novaOperacao: {
+        pet: '',
+        tutor: '',
+        status: '',
+        procedimento: '',
+      },
     };
   },
+
+  mounted() {
+    this.carregarOperacoes();
+  },
+
   methods: {
-    submitOperation() {
-      this.operations.push({
-        petType: this.petType,
-        data: this.data,
-        horario: this.horario,
-        status: this.status,
-        procedimento: this.procedimento
-      });
-      this.petType = "Cachorro";
-      this.data = "";
-      this.horario = "";
-      this.status = "";
-      this.procedimento = "";
+    formatDate(date) {
+      return moment(date).format('DD/MM/YYYY');
     },
-    updateStatus(index) {
-      const newStatus = prompt('Digite o novo status:');
-      if (newStatus !== null) {
-        this.operations[index].status = newStatus;
-      }
+
+    carregarOperacoes() {
+      axios.get('api/v1/operacao')
+        .then(response => {
+          this.operacoes = response.data.data;
+        })
+        .catch(error => {
+          console.error('Erro ao buscar operações:', error);
+        });
     },
-    updateHorario(index) {
-      const newHorario = prompt('Digite o novo horário no formato DD/MM/AAAA - HH:MM:');
-      if (newHorario !== null) {
-        this.operations[index].horario = newHorario;
-      }
-    }
-  }
+
+    registrarOp() {
+      var opData = {
+        pet_name: this.novaOperacao.pet,
+        name_tutor: this.novaOperacao.tutor,
+        status: this.novaOperacao.status,
+        procedimento: this.novaOperacao.procedimento,
+      };
+      axios.post('api/v1/operacao', opData)
+        .then(() => {
+          this.carregarOperacoes();
+          this.novaOperacao = {
+            pet: '',
+            tutor: '',
+            status: '',
+            procedimento: '',
+          };
+        })
+        .catch(error => {
+          console.error('Erro ao inserir operação:', error);
+        });
+    },
+
+    editarOperacao(operacao) {
+      operacao.editing = true;
+    },
+
+    salvarEdicao(operacao) {
+      operacao.editing = false;
+
+      const opData = {
+        pet_name: operacao.pet_name,
+        name_tutor: operacao.name_tutor,
+        status: operacao.status,
+        procedimento: operacao.procedimento,
+      };
+
+      axios.put(`api/v1/operacao/${operacao.id}`, opData)
+        .then(() => {
+
+          this.carregarOperacoes();
+        })
+        .catch(error => {
+          console.error('Erro ao salvar edição da operação:', error);
+        });
+    },
+
+    excluirOperacao(index) {
+      const operacao = this.operacoes[index];
+      axios.delete(`api/v1/operacao/${operacao.id}`)
+        .then(() => {
+          this.operacoes.splice(index, 1);
+        })
+        .catch(error => {
+          console.error('Erro ao excluir operação:', error);
+        });
+    },
+  },
 };
 </script>
-
-<style scoped>
-tr {
-  border-color: inherit;
-  border-style: solid;
-  border-width: 0;
-  border: 1px solid black;
-  border-radius: 54px;
-  text-align: center;
-}
-
-.btn-primary {
-  background-color: rgb(5, 175, 242);
-  border: none;
-  border-radius: 30px;
-}
-</style>

@@ -14,11 +14,6 @@
         <img src="@/assets/capa-helpet.png" alt="capa">
       </div>
     </header>
-
-
-    <ul>
-      <li>Admin (Gerenciamento de Higiente dos Pets)</li>
-    </ul>
   </div>
 </template>
 
@@ -32,13 +27,13 @@ export default {
 
 <style scoped>
 .second-section img {
-  background-color: #14A9FF;
+  background-color: #9757FF;
   clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
   padding: 10px 100px;
 }
 
 .first-section {
-  background-color: #14A9FF;
+  background-color: #9757FF;
   -webkit-clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
   clip-path: polygon(0% 0%, 87% 0%, 100% 50%, 87% 100%, 0% 100%);
   padding: 10px 100px;

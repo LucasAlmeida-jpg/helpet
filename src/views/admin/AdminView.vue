@@ -56,7 +56,7 @@
 
 <style lang="scss" scoped>
 .col {
-  background: #14A9FF;
+  background: #9757FF;
   margin: 10px;
   height: 183px;
   display: flex;
