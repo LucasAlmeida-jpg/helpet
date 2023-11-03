@@ -42,8 +42,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            <button type="button" class="btn btn-primary" @click="registrarMedicamento"
-              data-bs-dismiss="modal">Registrar</button>
+            <button type="button" class="" @click="registrarMedicamento" data-bs-dismiss="modal">Registrar</button>
           </div>
         </div>
       </div>

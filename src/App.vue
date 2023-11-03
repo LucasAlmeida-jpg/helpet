@@ -47,7 +47,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <router-link to="/"><button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+          <router-link to="/"><button type="button" class="" data-bs-dismiss="modal"
               @click="createUSer()">Salvar</button></router-link>
           <router-link to="/"><button type="button" class="btn btn-secondary"
               data-bs-dismiss="modal">Cancelar</button></router-link>
@@ -75,8 +75,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <router-link to="/client"><button type="button" class="btn btn-primary"
-              data-bs-dismiss="modal">Entrar</button></router-link>
+          <router-link to="/client"><button type="button" class="" data-bs-dismiss="modal">Entrar</button></router-link>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Recuperar Senha</button>
         </div>
       </div>
@@ -102,8 +101,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <router-link to="/Admin"><button type="button" class="btn btn-primary"
-              data-bs-dismiss="modal">Entrar</button></router-link>
+          <router-link to="/Admin"><button type="button" class="" data-bs-dismiss="modal">Entrar</button></router-link>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Recuperar Senha</button>
         </div>
       </div>

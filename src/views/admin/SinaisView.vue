@@ -13,7 +13,7 @@
               <small class="form-text text-muted" id="charCount">0/300 caracteres</small>
             </div>
             <div class="d-flex justify-content-center align-items-center">
-              <button class="btn btn-primary" @click="createSinais()">Salvar</button>
+              <button class="" @click="createSinais()">Salvar</button>
             </div>
           </form>
         </div>

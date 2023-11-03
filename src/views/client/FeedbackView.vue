@@ -9,7 +9,7 @@
         <textarea id="feedback-text" v-model="feedback" class="form-control" rows="4" maxlength="300" required
           placeholder="Digite aqui"></textarea>
       </div>
-      <button class="btn-primary btn" @click="createFeedback()">Enviar Feedback</button>
+      <button @click="createFeedback()">Enviar Feedback</button>
     </div>
   </div>
 </template>
