@@ -14,7 +14,7 @@ class RacaController extends Controller
     public function index()
     {
         $raca = new Raca;
-        return response()->json($raca->paginate('10'), 200);
+        return response()->json($raca->paginate('10000'), 200);
     }
 
     /**

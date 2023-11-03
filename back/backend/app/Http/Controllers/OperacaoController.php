@@ -15,7 +15,7 @@ class OperacaoController extends Controller
     public function index()
     {
         $operacao = new Operacao;
-        return response()->json($operacao->paginate('10'), 200);
+        return response()->json($operacao->paginate('10000'), 200);
     }
 
     /**

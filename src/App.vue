@@ -2,7 +2,7 @@
   <nav>
     <div class="container d-flex align-items-center justify-content-between">
       <div>
-        <div><img class="helpet" src="../src/assets/helpet.png" alt=""></div>
+        <div><img class="helpet" src="../src/assets/logo_helpett.png" alt=""></div>
       </div>
       <div>
         <button data-bs-toggle="modal" data-bs-target="#createAccount">Não possui conta?</button>
@@ -17,7 +17,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <div>
-            <img class="logo" src="@/assets/helpet.png" alt="Helpet Logo">
+            <img class="logo" src="@/assets/logo_helpett.png" alt="Helpet Logo">
           </div>
         </div>
         <div class="modal-body">
@@ -61,7 +61,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <div>
-            <img class="logo" src="@/assets/helpet.png" alt="Helpet Logo">
+            <img class="logo" src="@/assets/logo_helpett.png" alt="Helpet Logo">
           </div>
         </div>
         <div class="modal-body">
@@ -87,7 +87,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <div>
-            <img class="logo" src="@/assets/helpet.png" alt="Helpet Logo">
+            <img class="logo" src="@/assets/logo_helpett.png" alt="Helpet Logo">
           </div>
         </div>
         <div class="modal-body">
@@ -112,13 +112,17 @@
   <!-- 
   <footer class="text-center">
     <div class="container-fluid d-flex align-items-center justify-content-center">
-      <div><img src="../src/assets/helpet.png" class="logo" alt=""></div>
+      <div><img src="../src/assets/logo_helpett.png" class="logo" alt=""></div>
     </div>
   </footer> -->
 </template>
 
 
 <style lang="scss">
+.color-default {
+  color: #9757FF;
+}
+
 nav {
   padding: 30px;
 }

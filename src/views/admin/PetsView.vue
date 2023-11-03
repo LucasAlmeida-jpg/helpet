@@ -2,18 +2,18 @@
   <div class="text-center">
     <div class="container">
       <div class="row row-cols-2 d-flex justify-content-between">
-        <div class="col-3 card-users" v-for="(u, index) in pets" :key="index">
-          <div>
-            <img src="@/assets/animal.png" alt="">
+        <div class="col-3 border card-pets" v-for="(u, index) in pets" :key="index">
+          <div class="text-center">
+            <img src="@/assets/pets.png" alt="">
           </div>
           <div>
-            <div class="info-user">Nome do Pet: {{ u.nome }}</div>
-            <div class="info-user">Tipo: {{ u.tipo }}</div>
-            <div class="info-user">Tamanho: {{ u.tamanho }}</div>
-            <div class="info-user">Sexo: {{ u.sexo }}</div>
-            <div class="info-user">Raça: {{ u.raca_pet }}</div>
-            <div class="info-user">CPF do tutor: {{ u.raca_pet }}</div>
-            <div class="info-user">Tutor: {{ u.nome_tutor }}</div>
+            <div class="info-user"><span>Nome do Pet: </span>{{ u.nome }}</div>
+            <div class="info-user"><span>Tipo: </span>{{ u.tipo }}</div>
+            <div class="info-user"><span>Tamanho: </span>{{ u.tamanho }}</div>
+            <div class="info-user"><span>Sexo: </span>{{ u.sexo }}</div>
+            <div class="info-user"><span>Raça: </span>{{ u.raca_pet }}</div>
+            <div class="info-user"><span>CPF do tutor: </span>{{ u.raca_pet }}</div>
+            <div class="info-user"><span>Tutor: </span>{{ u.nome_tutor }}</div>
           </div>
         </div>
       </div>
@@ -49,38 +49,29 @@ export default {
 
 
 <style lang="scss" scoped>
-.card-users {
-  margin: 10px;
-  box-shadow: inset;
-  padding: 30px 10px;
-  font-weight: bold;
-  color: #9757FF;
-  font-size: 20px;
+span {
+  font-weight: bold !important;
+}
+
+.card-pets {
   justify-content: center;
   border-radius: 12px;
   transition: transform 0.3s ease;
-  text-align: center;
+  text-align: justify;
   cursor: pointer;
-  opacity: 0.8;
-
+  padding: 40px;
+  margin: 17px;
 
   img {
     width: 80px;
     object-fit: cover;
+    margin-top: -20px;
   }
 
 
   &:hover {
     transform: scale(1.1);
 
-  }
-
-  .info-user {
-    background: #9757FF;
-    margin: 5px;
-    color: white;
-    padding: 8px 0px;
-    border-radius: 40px;
   }
 }
 </style>

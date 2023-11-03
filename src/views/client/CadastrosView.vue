@@ -13,7 +13,7 @@
           <input class="form-control" v-model="pet.cpfTutor" placeholder="CPF do Tutor">
           <input class="form-control" v-model="pet.nomeTutor" placeholder="Nome do Tutor">
           <button @click.prevent="createPet()">Cadastrar</button> <br>
-          <div class="text-center mt-5 " v-if="cadastroBemSucedido">Pet cadastrado com sucesso!
+          <div class="text-center mt-3 color-default " v-if="cadastroBemSucedido">Pet cadastrado com sucesso!
           </div>
         </form>
       </div>
@@ -59,6 +59,10 @@ export default {
           console.log(response);
           this.pet = response.data.data;
           this.cadastroBemSucedido = true;
+          setTimeout(() => {
+            window.location.reload();
+            this.cadastroBemSucedido = false;
+          }, 2000);
         })
         .catch(error => {
           console.error('Erro ao criar pet:', error);

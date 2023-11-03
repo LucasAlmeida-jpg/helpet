@@ -14,7 +14,7 @@ class MedicamentoController extends Controller
     public function index()
     {
         $medicamento = new Medicamento;
-        return response()->json($medicamento->paginate('10'), 200);
+        return response()->json($medicamento->paginate('10000'), 200);
     }
 
     /**

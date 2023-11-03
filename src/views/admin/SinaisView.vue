@@ -1,47 +1,52 @@
 <template>
   <div>
     <main class="container">
-      <h2 class="offset-top-20 my-4">Gerenciamento dos Sinais Vitais</h2>
+      <h3 class="offset-top-20 my-4">Gerenciamento dos Sinais Vitais</h3>
+      <div class="text-center my-5">
+        <h1 class="sinais">Sinais vitais</h1>
+        <img src="@/assets/logo_helpett.png" alt="">
+      </div>
       <div class="mb-5">
       </div>
-      <div class="card mb-3">
+      <div class="mb-4">
         <div class="card-body">
-          <form class="text-left" id="vitalsForm">
-            <div class="form-group">
-              <textarea v-model="description" class="form-control" id="vitalsObservations" name="message" maxlength="300"
-                placeholder="Digite as observações do pet (máximo de 300 caracteres)"></textarea>
-              <small class="form-text text-muted" id="charCount">0/300 caracteres</small>
-            </div>
-            <div class="d-flex justify-content-center align-items-center">
-              <button class="" @click="createSinais()">Salvar</button>
-            </div>
-          </form>
+          <div>
+            <textarea v-model="description" class="form-control" id="vitalsObservations" name="message" maxlength="300"
+              placeholder="Digite as observações do pet (máximo de 300 caracteres)"></textarea>
+            <small class="form-text text-muted" id="charCount">0/300 caracteres</small>
+          </div>
+          <div class="d-flex justify-content-end align-items-center">
+            <button class="" @click="createSinais()">Salvar</button>
+          </div>
+          <div v-if="sinalCadastro" class="color-default text-center mt-2">
+            Sinal Vital cadastrado com sucesso!
+          </div>
         </div>
       </div>
-      <h1 class="my-5 text-center bg">Descrições dos Pets
-      </h1>
+
       <div v-for="(i, index) in sinais" :key="index">
-        <div class="d-flex align-items-center justify-content-between">
+        <div class="form-control mb-4 p-4 d-flex align-items-center justify-content-between">
           <div>
             <h4>{{ i.descricao }}</h4>
           </div>
           <div>
-            <h4 class="date-info">{{ formatDateAndTime(i.created_at) }}</h4>
+            <h4 class="date-info">Data: {{ formatDate(i.created_at) }}</h4>
           </div>
         </div>
-        <hr>
       </div>
     </main>
   </div>
 </template>
 
 <script>
+import moment from 'moment';
 import axios from '@/axiosDefault';
 export default {
   data() {
     return {
       sinais: [],
       description: '',
+      sinalCadastro: false,
     };
   },
 
@@ -49,33 +54,26 @@ export default {
     axios.get('api/v1/sinais')
       .then(response => {
         this.sinais = response.data.data;
-        console.log(this.sinais);
       })
-      .catch(error => {
-        console.error('Erro ao buscar usuários:', error);
-      });
   },
 
   methods: {
     createSinais() {
       var data = {
         descricao: this.description,
-      }
+      };
       axios.post('api/v1/sinais', data)
         .then(response => {
           this.sinais = response.data.data;
-        })
-        .catch(error => {
-          console.error('Erro ao buscar usuários:', error);
+          this.sinalCadastro = true;
+          setTimeout(() => {
+            this.sinalCadastro = false;
+            window.location.reload();
+          }, 2000);
         });
     },
-    formatDateAndTime(datetime) {
-      const date = new Date(datetime);
-      const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-      const hours = String(date.getHours()).padStart(2, '0');
-      const minutes = String(date.getMinutes()).padStart(2, '0');
-      const formattedTime = `${hours}:${minutes}`;
-      return `Data: ${formattedDate} Horário: ${formattedTime}`;
+    formatDate(date) {
+      return moment(date).format('DD/MM/YYYY');
     },
   }
 };
@@ -88,11 +86,20 @@ export default {
 
 }
 
+.sinais {
+  font-size: 14px;
+  margin-bottom: -7px;
+  font-style: italic;
+  color: #9757FF;
+  font-weight: bold;
+}
+
 .bg {
   background: #9757FF;
   color: white;
   border-radius: 12px;
   padding: 20px;
+
 }
 
 .date-info {

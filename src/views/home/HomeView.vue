@@ -26,6 +26,10 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  margin-top: 20px;
+}
+
 .second-section img {
   background-color: #9757FF;
   clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);

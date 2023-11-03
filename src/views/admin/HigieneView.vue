@@ -15,7 +15,7 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Gerenciamento de Higiente dos Pets</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Gerenciamento de Higiene dos Pets</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -54,18 +54,18 @@
       </div>
     </div>
     <div class="mt-4 text-center info container">
-      <div class="row row-cols-2 d-flex justify-content-between">
-        <div class="medication-info col-3 card-users" v-for="(h, index) in higienes" :key="index">
-          <div>
-            <img src="@/assets/animal.png" alt="">
+      <div class="row row-cols-2 d-flex justify-content-center">
+        <div class="higiene-info col-4 border" v-for="(h, index) in higienes" :key="index">
+          <div class="text-center">
+            <img src="@/assets/higiene.png" alt="">
           </div>
           <div>
-            <div>Nome do Pet: {{ h.pet_name }} </div>
-            <div>Tipo do Pet: {{ h.type_animal }} </div>
-            <div>Tipo de cuidado: {{ h.type_care }} </div>
-            <div>Observação {{ h.cuidados }} </div>
-            <div>Data do ultimo procedimento? {{ h.ultimar }} </div>
-            <div>Data do atual procedimento? {{ h.proxr }} </div>
+            <div><span>Nome do Pet:</span> {{ h.pet_name }} </div>
+            <div><span>Tipo do Pet:</span> {{ h.type_animal }} </div>
+            <div><span>Tipo de cuidado:</span> {{ h.type_care }} </div>
+            <div><span>Observação</span> {{ h.cuidados }} </div>
+            <div><span>Data do ultimo procedimento?</span> {{ h.ultimar }} </div>
+            <div><span>Data do atual procedimento?</span> {{ h.proxr }} </div>
           </div>
         </div>
       </div>
@@ -124,24 +124,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.medication-info {
-  margin: 10px;
-  box-shadow: inset;
-  padding: 30px 10px;
-  font-weight: bold;
-  color: #9757FF;
-  font-size: 20px;
+span {
+  font-weight: bold !important;
+}
+
+.higiene-info {
   justify-content: center;
   border-radius: 12px;
   transition: transform 0.3s ease;
-  text-align: center;
+  text-align: justify;
   cursor: pointer;
-  opacity: 0.8;
+  padding: 40px;
+  margin: 17px;
+  // box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.81);
+  // -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.81);
+  // -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.81);
+
 
 
   img {
-    width: 80px;
+    width: 250px;
     object-fit: cover;
+    margin-top: -35px;
   }
 
 

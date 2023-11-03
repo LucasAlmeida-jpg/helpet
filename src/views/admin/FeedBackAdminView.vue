@@ -1,18 +1,19 @@
 <template>
   <div class="container text-center">
     <div class="feedback-container">
-      <h3>Feedback dos Clientes</h3>
+      <div class="text-center">
+        <img src="@/assets/feedback.png" alt="">
+      </div>
       <div class="container">
         <div class="row row-cols-2 d-flex justify-content-center">
-          <div class="col-6 card-users d-flex justify-content-center align-items-center" v-for="(f, index) in feed"
-            :key="index">
+          <div class="col-4 border card-users" v-for="(f, index) in feed" :key="index">
             <div>
               <img src="@/assets/user.png" alt="">
             </div>
             <div>
-              <div class="info-user">Nome: {{ f.name_tutor }}</div>
-              <div class="info-user">Feedback: {{ f.feedback_tutor }}</div>
-              <div class="info-user">Data da postagem: {{ formatDateAndTime(f.created_at) }}</div>
+              <div class="info-user"><span>Nome: </span>{{ f.name_tutor }}</div>
+              <div class="info-user"><span>Feedback: </span>{{ f.feedback_tutor }}</div>
+              <div class="info-user"><span>Data da postagem: </span>{{ formatDate(f.created_at) }}</div>
             </div>
           </div>
         </div>
@@ -22,6 +23,8 @@
 </template>
 <script>
 import axios from '@/axiosDefault';
+import moment from 'moment';
+
 export default {
   data() {
     return {
@@ -40,14 +43,10 @@ export default {
   },
 
   methods: {
-    formatDateAndTime(datetime) {
-      const date = new Date(datetime);
-      const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-      const hours = String(date.getHours()).padStart(2, '0');
-      const minutes = String(date.getMinutes()).padStart(2, '0');
-      const formattedTime = `${hours}:${minutes}`;
-      return `Data: ${formattedDate} Horário: ${formattedTime}`;
+    formatDate(date) {
+      return moment(date).format('DD/MM/YYYY');
     },
+
   }
 
 
@@ -55,19 +54,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+span {
+  font-weight: bold !important;
+}
+
 .card-users {
-  margin: 10px;
-  box-shadow: inset;
-  padding: 30px 10px;
-  font-weight: bold;
-  color: #9757FF;
-  font-size: 20px;
   justify-content: center;
   border-radius: 12px;
   transition: transform 0.3s ease;
-  text-align: center;
+  text-align: justify;
   cursor: pointer;
-  opacity: 0.8;
+  padding: 40px;
+  margin: 17px;
 
 
   img {
@@ -81,16 +79,16 @@ export default {
 
   }
 
-  .info-user {
-    background: #9757FF;
-    margin: 5px;
-    color: white;
-    padding: 8px 0px;
-    min-width: 900px !important;
-    border-radius: 40px;
-    box-shadow: 50px 10px 58px 0px rgba(0, 0, 0, 0.81);
-    -webkit-box-shadow: 50px 10px 58px 0px rgba(0, 0, 0, 0.81);
-    -moz-box-shadow: 50px 10px 58px 0px rgba(0, 0, 0, 0.81);
-  }
+  // .info-user {
+  //   background: #9757FF;
+  //   margin: 5px;
+  //   color: white;
+  //   padding: 8px 0px;
+  //   min-width: 900px !important;
+  //   border-radius: 40px;
+  //   box-shadow: 50px 10px 58px 0px rgba(0, 0, 0, 0.81);
+  //   -webkit-box-shadow: 50px 10px 58px 0px rgba(0, 0, 0, 0.81);
+  //   -moz-box-shadow: 50px 10px 58px 0px rgba(0, 0, 0, 0.81);
+  // }
 }
 </style>

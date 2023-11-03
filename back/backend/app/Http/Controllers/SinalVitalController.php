@@ -13,7 +13,7 @@ class SinalVitalController extends Controller
     public function index()
     {
         $sinalVital = new SinalVital;
-        return response()->json($sinalVital->paginate('10'), 200);
+        return response()->json($sinalVital->paginate('1000'), 200);
     }
 
     /**

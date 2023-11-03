@@ -21,23 +21,23 @@
           <div class="modal-body">
             <div>
               <label for="med">Nome do Pet</label>
-              <input id="med" v-model="novoMedicamento.petMedications">
+              <input form-control id="med" v-model="novoMedicamento.petMedications">
             </div>
             <div class="my-3">
               <label for="pet">Tipo de Pet</label>
-              <input id="pet" v-model="novoMedicamento.petType">
+              <input form-control id="pet" v-model="novoMedicamento.petType">
             </div>
 
             <div class="my-3">
-              <label for="pet">Horário da aplicacao</label>
-              <input id="pet" v-model="novoMedicamento.timeAplication">
+              <label for="pet">Horário da Aplicação</label>
+              <input form-control type="time" id="pet" v-model="novoMedicamento.timeAplication">
             </div>
             <label for="medicamento">Nome do medicamento</label>
-            <input id="medicamento" type="text" v-model="novoMedicamento.medicationName">
+            <input form-control id="medicamento" type="text" v-model="novoMedicamento.medicationName">
 
             <div class="mt-3">
               <label for="name">Dosagem</label>
-              <input id="name" type="text" v-model="novoMedicamento.dosage">
+              <input form-control id="name" type="text" v-model="novoMedicamento.dosage">
             </div>
           </div>
           <div class="modal-footer">
@@ -47,18 +47,18 @@
         </div>
       </div>
     </div>
-    <div class="mt-4 text-center info container">
-      <div class="row row-cols-2 d-flex justify-content-between">
-        <div class="medication-info col-3 card-users" v-for="(medicamento, index) in medicamentos" :key="index">
-          <div>
-            <img src="@/assets/animal.png" alt="">
+    <div class="mt-5 text-center container">
+      <div class="row d-flex justify-content-center">
+        <div class="medication-info border col-5" v-for="(medicamento, index) in medicamentos" :key="index">
+          <div class="text-center mb-3">
+            <img src="@/assets/medicamentos.png" alt="">
           </div>
           <div>
-            <div>Nome do Pet: {{ medicamento.nome_pet }} </div>
-            <div>Medicamento: {{ medicamento.nome }} </div>
-            <div>Dose: {{ medicamento.dose }}</div>
-            <div>Horário da Aplicação : {{ medicamento.hora_de_aplicação }}</div>
-            <div>Tipo do Pet : {{ medicamento.tipo_pet }}</div>
+            <div><span>Nome do Pet:</span> {{ medicamento.nome_pet }} </div>
+            <div><span>Medicamento:</span> {{ medicamento.nome }} </div>
+            <div><span>Dose:</span> {{ medicamento.dose }}</div>
+            <div><span>Horário da Aplicação:</span> {{ medicamento.hora_de_aplicação }}</div>
+            <div><span>Tipo do Pet:</span> {{ medicamento.tipo_pet }}</div>
           </div>
         </div>
       </div>
@@ -102,7 +102,7 @@ export default {
         tipo_pet: this.novoMedicamento.petType,
         nome: this.novoMedicamento.medicationName,
         dose: this.novoMedicamento.dosage,
-        hora_de_aplicação: '2023-11-01 ' + this.novoMedicamento.timeAplication + ':00'
+        hora_de_aplicação: this.novoMedicamento.timeAplication,
       };
       axios.post('api/v1/medicamento', medData)
         .then(response => {
@@ -117,38 +117,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+span {
+  font-weight: bold !important;
+}
+
 .medication-info {
-  margin: 10px;
-  box-shadow: inset;
-  padding: 30px 10px;
-  font-weight: bold;
-  color: #9757FF;
-  font-size: 20px;
   justify-content: center;
   border-radius: 12px;
   transition: transform 0.3s ease;
-  text-align: center;
+  text-align: justify;
   cursor: pointer;
-  opacity: 0.8;
-
+  padding: 40px;
+  margin: 17px;
 
   img {
-    width: 80px;
+    width: 250px;
     object-fit: cover;
   }
-
 
   &:hover {
     transform: scale(1.1);
 
-  }
-
-  .info-user {
-    background: #9757FF;
-    margin: 5px;
-    color: white;
-    padding: 8px 0px;
-    border-radius: 40px;
   }
 }
 </style>

@@ -1,16 +1,19 @@
 <template>
   <div class="text-center">
     <div class="container">
-      <div class="row row-cols-2 d-flex justify-content-between">
-        <div class="col-3 card-users" v-for="(u, index) in users" :key="index">
-          <div>
-            <img src="@/assets/user.png" alt="">
+      <div class="text-center my-5">
+        <img src="@/assets/logo_helpett.png" alt="">
+      </div>
+      <div class="row row-cols-2 d-flex justify-content-center">
+        <div class="col-3 border card-users" v-for="(u, index) in users" :key="index">
+          <div class="text-center">
+            <img src="@/assets/usuarios.png" alt="">
           </div>
           <div>
-            <div class="info-user">Nome: {{ u.nome }}</div>
-            <div class="info-user">E-mail: {{ u.email }}</div>
-            <div class="info-user">CPF: {{ formatCPF(u.cpf) }}</div>
-            <div class="info-user">Endereço: {{ u.endereco }}</div>
+            <div class="info-user"><span>Nome: </span>{{ u.nome }}</div>
+            <div class="info-user"><span>E-mail: </span>{{ u.email }}</div>
+            <div class="info-user"><span>CPF: </span>{{ formatCPF(u.cpf) }}</div>
+            <div class="info-user"><span>Endereço: </span>{{ u.endereco }}</div>
           </div>
         </div>
       </div>
@@ -53,23 +56,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+span {
+  font-weight: bold !important;
+}
+
 .card-users {
-  margin: 10px;
-  box-shadow: inset;
-  padding: 30px 10px;
-  font-weight: bold;
-  color: #9757FF;
-  font-size: 20px;
   justify-content: center;
   border-radius: 12px;
   transition: transform 0.3s ease;
-  text-align: center;
+  text-align: justify;
   cursor: pointer;
-  opacity: 0.8;
+  padding: 40px 20px;
+  margin: 17px;
 
 
   img {
-    width: 80px;
+    width: 250px;
+    margin-top: -30px;
     object-fit: cover;
   }
 
@@ -79,13 +82,7 @@ export default {
 
   }
 
-  .info-user {
-    background: #9757FF;
-    margin: 5px;
-    color: white;
-    padding: 8px 0px;
-    border-radius: 40px;
-  }
+
 }
 </style>
 

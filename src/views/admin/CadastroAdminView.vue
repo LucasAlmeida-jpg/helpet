@@ -5,7 +5,11 @@
     <div class="tab-content text-center" id="pills-tabContent">
       <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
         tabindex="0">
-        <form>
+        <div class="text-center my-5">
+          <h1 class="sinais">Cadastros</h1>
+          <img src="@/assets/logo_helpett.png" alt="">
+        </div>
+        <form class="mb-5">
           <input class="form-control" v-model="pet.nome_pet" placeholder="Nome do Pet">
           <input class="form-control" v-model="pet.tipo_pet" placeholder="Tipo do Pet">
           <input class="form-control" v-model="pet.tamanho_pet" placeholder="Tamanho do Pet">
@@ -17,6 +21,7 @@
           <button @click.prevent="createPet()">Cadastrar</button>
         </form>
       </div>
+
       <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
         <form action="">
           <input class="form-control" type="text" placeholder="Nome do Pet">
@@ -48,6 +53,15 @@ input {
 form {
   display: block !important;
 }
+
+.sinais {
+  font-size: 14px;
+  margin-bottom: -7px;
+  font-style: italic;
+  color: #9757FF;
+  font-weight: bold;
+}
+
 
 button {
   min-width: 350px !important;
