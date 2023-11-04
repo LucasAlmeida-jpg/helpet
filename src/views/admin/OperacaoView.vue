@@ -13,8 +13,12 @@
       </div>
       <div class="mt-4">
         <label for="status">Qual o status do procedimento?</label>
-        <input v-model="novaOperacao.status" class="form-control" id="status" type="text"
-          placeholder="Status do procedimento">
+        <select id="status" v-model="novaOperacao.status" class="form-control">
+          <option value="Em andamento">Em andamento</option>
+          <option value="Finalizado">Finalizado</option>
+          <option value="Cancelado">Cancelado</option>
+        </select>
+
       </div>
       <div class="mt-4">
         <label for="procedimento">Qual é o procedimento?</label>
@@ -44,7 +48,15 @@
                 </p>
               </div>
               <div>
-                <p><span class="bold">Status: </span><span v-if="!o.editing">{{ o.status }}</span>
+                <p>
+                  <span class="bold">Status: </span>
+                  <span v-if="!o.editing" :style="{
+                    color: getStatusColor(o.status),
+                    backgroundColor: getStatusBackgroundColor(o.status),
+                    borderRadius: '40px',
+                    padding: '4px 10px',
+                    color: 'white'
+                  }">{{ o.status }}</span>
                   <input v-if="o.editing" v-model="o.status" class="form-control" type="text">
                 </p>
               </div>
@@ -86,7 +98,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="button" class="bg-danger" @click="excluirOperacao(index)"
+              <button type="button" class="bg-danger" @click="excluirOperacao(index, 1)"
                 data-bs-dismiss="modal">Excluir</button>
             </div>
           </div>
@@ -186,6 +198,30 @@ export default {
           console.error('Erro ao excluir operação:', error);
         });
     },
+    getStatusColor(status) {
+      switch (status) {
+        case 'Em andamento':
+          return ''; // Roxo
+        case 'Finalizado':
+          return 'blue'; // Azul
+        case 'Cancelado':
+          return 'red'; // Vermelho
+        default:
+          return 'black'; // Cor padrão para outros estados
+      }
+    },
+    getStatusBackgroundColor(status) {
+      switch (status) {
+        case 'Em andamento':
+          return 'black';
+        case 'Finalizado':
+          return 'green';
+        case 'Cancelado':
+          return 'red';
+      }
+    },
   },
 };
 </script>
+
+<style lang="scss"></style>

@@ -119,9 +119,21 @@
 
 
 <style lang="scss">
-template {
-  background-color: black !important;
+.em-andamento {
+  color: #9757FF;
+
 }
+
+.finalizado {
+  color: blue;
+
+}
+
+.cancelado {
+  color: red;
+
+}
+
 
 .color-default {
   color: #9757FF;
