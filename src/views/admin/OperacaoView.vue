@@ -25,7 +25,9 @@
         <button type="submit" class="mt-4" @click="registrarOp()">Inserir operações</button>
       </div>
     </div>
-    <h1 class="text-center my-5">Lista de operações</h1>
+    <div class="text-center my-5">
+      <img src="@/assets/list.png" alt="">
+    </div>
     <div v-for="(o, index) in operacoes" :key="index">
       <div class="container">
         <div class="row  d-flex justify-content-between">
