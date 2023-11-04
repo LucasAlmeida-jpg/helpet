@@ -5,7 +5,8 @@
         <div><img class="helpet" src="../src/assets/logo_helpett.png" alt=""></div>
       </div>
       <div>
-        <button data-bs-toggle="modal" data-bs-target="#createAccount">Não possui conta?</button>
+        <button class="btn btn-secondary-account" data-bs-toggle="modal" data-bs-target="#createAccount">Não possui
+          conta?</button>
         <button class="mx-3" data-bs-toggle="modal" data-bs-target="#loginClient">Cliente</button>
         <button data-bs-toggle="modal" data-bs-target="#loginAdmin">Admin</button>
       </div>
@@ -167,6 +168,12 @@ button {
   border-radius: 40px !important;
   font-size: 14px;
   font-weight: bold;
+}
+
+.btn-secondary-account {
+  border: #9757FF !important;
+  color: #9757FF !important;
+  border: 4px solid #9757FF !important;
 }
 
 footer {
