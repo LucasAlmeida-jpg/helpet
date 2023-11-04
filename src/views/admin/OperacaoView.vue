@@ -32,30 +32,30 @@
           <div class="col">
             <div class="form-control mb-3 p-3">
               <div>
-                <p>Nome do Pet: <span v-if="!o.editing">{{ o.pet_name }}</span>
+                <p><span class="bold">Nome do Pet: </span><span v-if="!o.editing">{{ o.pet_name }}</span>
                   <input v-if="o.editing" v-model="o.pet_name" class="form-control" type="text">
                 </p>
               </div>
               <div>
-                <p>Procedimento: <span v-if="!o.editing">{{ o.procedimento }}</span>
+                <p><span class="bold">Procedimento: </span><span v-if="!o.editing">{{ o.procedimento }}</span>
                   <input v-if="o.editing" v-model="o.procedimento" class="form-control" type="text">
                 </p>
               </div>
               <div>
-                <p>Status: <span v-if="!o.editing">{{ o.status }}</span>
+                <p><span class="bold">Status: </span><span v-if="!o.editing">{{ o.status }}</span>
                   <input v-if="o.editing" v-model="o.status" class="form-control" type="text">
                 </p>
               </div>
               <div>
-                <p>Nome do tutor: <span v-if="!o.editing">{{ o.name_tutor }}</span>
+                <p><span class="bold">Nome do tutor: </span><span v-if="!o.editing">{{ o.name_tutor }}</span>
                   <input v-if="o.editing" v-model="o.name_tutor" class="form-control" type="text">
                 </p>
               </div>
               <div>
-                <p>Data de criação desta operação: {{ formatDate(o.created_at) }}</p>
+                <p><span class="bold">Data de criação desta operação: </span>{{ formatDate(o.created_at) }}</p>
               </div>
               <div>
-                <p>Data de modificação desta operação: {{ formatDate(o.update_at) }}</p>
+                <p><span class="bold">Data de modificação desta operação: </span>{{ formatDate(o.update_at) }}</p>
               </div>
               <hr>
               <div class="d-flex align-items-center justify-content-between">
@@ -64,9 +64,28 @@
                   <button @click="salvarEdicao(o)" v-if="o.editing">Salvar</button>
                 </div>
                 <div>
-                  <button @click="excluirOperacao(index)">Excluir</button>
+                  <button data-bs-toggle="modal" data-bs-target="#exampleModal">Excluir</button>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Deseja Excluir?</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <h5 class="text-danger"> Ao excluir, essa operação não poderá ser desfeita! <br> Tem certeza?
+              </h5>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="bg-danger" @click="excluirOperacao(index)"
+                data-bs-dismiss="modal">Excluir</button>
             </div>
           </div>
         </div>

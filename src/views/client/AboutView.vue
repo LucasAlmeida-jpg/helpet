@@ -1,5 +1,5 @@
 <template>
-  <div class="container text-center">
+  <div class="container text-center mt-5">
     <div class="row">
       <div class="col">
         <router-link to="/cadastros">

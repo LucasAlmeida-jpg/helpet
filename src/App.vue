@@ -179,6 +179,10 @@ footer {
   padding: 5px;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 input,
 select {
   width: 100%;
