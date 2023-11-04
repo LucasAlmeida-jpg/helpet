@@ -55,6 +55,11 @@
 </template>
 
 <style lang="scss" scoped>
+h4 {
+  text-transform: uppercase;
+  font-size: 15px;
+}
+
 .col {
   background: #9757FF;
   margin: 10px;
