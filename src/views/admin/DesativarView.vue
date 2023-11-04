@@ -4,9 +4,9 @@
       <h3 class="text-center my-5">Desativar Perfil do usuário</h3>
       <div class="row">
         <div class="mb-3">
-          <p>Nome do tutor</p>
-          <select v-model="selectedUserId">
-            <option class="optionDisabled" v-for="user in users" :key="user.id" :value="user.id">{{ user.nome }}</option>
+          <label for="tutor">Desativar Perfil do usuário selecionando abaixo.</label>
+          <select id="tutor" v-model="selectedUserId" class="form-control">
+            <option class="optionDisabled " v-for="user in users" :key="user.id" :value="user.id">{{ user.nome }}</option>
           </select>
         </div>
       </div>

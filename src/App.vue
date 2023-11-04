@@ -119,6 +119,10 @@
 
 
 <style lang="scss">
+template {
+  background-color: black !important;
+}
+
 .color-default {
   color: #9757FF;
 }
@@ -177,7 +181,6 @@ footer {
 
 input,
 select {
-  border-radius: 20px;
   width: 100%;
   padding: 10px;
 }

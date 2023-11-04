@@ -10,7 +10,7 @@ class SinalVital extends Model
     use HasFactory;
 
     protected $table = 'sinais_vitais';
-    protected $fillable = ['descricao'];
+    protected $fillable = ['description', 'pet_name'];
 
     public function pets()
     {

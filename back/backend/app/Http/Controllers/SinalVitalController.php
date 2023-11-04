@@ -29,23 +29,22 @@ class SinalVitalController extends Controller
      */
     public function store(Request $request)
     {
-        $data  = $request->all();
-
         try {
             $sinalVital = new SinalVital;
-            $sinalVital = $sinalVital->create($data);
-
+            $sinalVital->descricao = $request->input('descricao');
+            $sinalVital->pet_name = $request->input('pet_name');
+            $sinalVital->save(); 
+    
             return response()->json([
-                'data' => [
-                    'message' => 'SinalVital cadastrada com sucesso!'
-                ]
+                'data' => $sinalVital
             ], 201);
-
+    
         } catch (\Throwable $th) {
             \Log::error('Erro ao criar SinalVital: ' . $th->getMessage());
             return response()->json(['message' => $th->getMessage()], 500);
         }
     }
+    
 
     /**
      * Display the specified resource.
