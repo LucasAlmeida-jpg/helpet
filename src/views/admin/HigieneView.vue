@@ -26,7 +26,10 @@
 
             <div class="my-3">
               <label for="pet">Nome de Pet</label>
-              <input id="pet" v-model="novaHigiene.petName">
+              <select name="pet" v-model="novaHigiene.petName">
+                <option value="" disabled selected>Selecione o Pet</option>
+                <option v-for="(pet, index) in pets" :value="pet.nome" :key="index">{{ pet.nome }}</option>
+              </select>
             </div>
 
             <div class="my-3">
@@ -64,8 +67,8 @@
             <div><span>Tipo do Pet:</span> {{ h.type_animal }} </div>
             <div><span>Tipo de cuidado:</span> {{ h.type_care }} </div>
             <div><span>Observação</span> {{ h.cuidados }} </div>
-            <div><span>Data do ultimo procedimento?</span> {{ h.ultimar }} </div>
-            <div><span>Data do atual procedimento?</span> {{ h.proxr }} </div>
+            <div><span>Data do ultimo procedimento?</span> {{ formatDate(h.ultimar) }} </div>
+            <div><span>Data do atual procedimento?</span> {{ formatDate(h.proxr) }} </div>
           </div>
         </div>
       </div>
@@ -75,7 +78,7 @@
 
 <script>
 import axios from '@/axiosDefault';
-
+import moment from 'moment'
 export default {
   data() {
     return {
@@ -88,6 +91,7 @@ export default {
         obs: '',
         petName: '',
       },
+      pets: [],
     };
   },
 
@@ -99,9 +103,18 @@ export default {
       .catch(error => {
         console.error('Erro ao buscar usuários:', error);
       });
+
+
+    axios.get('api/v1/pet')
+      .then(response => {
+        this.pets = response.data.data;
+      })
   },
 
   methods: {
+    formatDate(date) {
+      return moment(date).format('DD/MM/YYYY');
+    },
 
     registrarHigiene() {
       var medData = {
@@ -115,6 +128,7 @@ export default {
       axios.post('api/v1/higiene', medData)
         .then(response => {
           this.higienes = response.data.data;
+          window.location.reload();
         })
     }
   }

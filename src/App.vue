@@ -1,9 +1,9 @@
 <template>
   <nav>
     <div class="container d-flex align-items-center justify-content-between">
-      <div>
+      <a href="/">
         <div><img class="helpet" src="../src/assets/logo_helpett.png" alt=""></div>
-      </div>
+      </a>
       <div>
         <button class="btn btn-secondary-account" data-bs-toggle="modal" data-bs-target="#createAccount">Não possui
           conta?</button>

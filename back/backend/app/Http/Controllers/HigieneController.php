@@ -10,7 +10,7 @@ class HigieneController extends Controller
     public function index()
     {
         try {
-            $higiene = Higiene::select('id', 'ultimar', 'proxr', 'cuidados', 'created_at', 'updated_at', 'type_care', 'type_animal')->paginate(10000);
+            $higiene = Higiene::select('id', 'ultimar', 'proxr', 'cuidados', 'created_at', 'updated_at', 'type_care', 'type_animal', 'pet_name')->paginate(10000);
 
             return response()->json(['data' => $higiene], 200);
         } catch (\Throwable $th) {

@@ -11,6 +11,11 @@
           <h4>Deixar FeedBacks</h4>
         </router-link>
       </div>
+      <!-- <div class="col">
+        <router-link to="/pagamento">
+          <h4>Pagamento</h4>
+        </router-link>
+      </div> -->
     </div>
   </div>
 </template>

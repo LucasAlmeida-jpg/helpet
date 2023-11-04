@@ -1,32 +1,37 @@
 <template>
   <div class="container">
     <div class="row">
-      <div>
-        <label for="pet">Nome do Pet?</label>
-        <input v-model="novaOperacao.pet_name" class="form-control" id="pet" type="text"
-          placeholder="Qual é o Pet? (Cachorro, gato...)">
-      </div>
-      <div class="mt-4">
-        <label for="tutor">Nome do tutor</label>
-        <input v-model="novaOperacao.tutor" class="form-control" id="tutor" type="text"
-          placeholder="Digite o nome do Tutor">
-      </div>
-      <div class="mt-4">
-        <label for="status">Qual o status do procedimento?</label>
-        <select id="status" v-model="novaOperacao.status" class="form-control">
-          <option value="Em andamento">Em andamento</option>
-          <option value="Finalizado">Finalizado</option>
-          <option value="Cancelado">Cancelado</option>
-        </select>
-
-      </div>
-      <div class="mt-4">
-        <label for="procedimento">Qual é o procedimento?</label>
-        <input v-model="novaOperacao.procedimento" class="form-control" id="procedimento" type="text"
-          placeholder="Procedimento">
-      </div>
-      <div class="form-floating mt-3 d-flex justify-content-center">
-        <button type="submit" class="mt-4" @click="registrarOp()">Inserir operações</button>
+      <div class="container  d-flex justify-content-center">
+        <div class="form-helpet">
+          <div>
+            <label for="pet">Qual o Pet</label>
+            <select class="form-control" name="med" v-model="novaOperacao.pet_name">
+              <option value="" disabled selected>Selecione o Pet</option>
+              <option v-for="(pet, index) in pets" :value="pet.nome" :key="index">{{ pet.nome }}</option>
+            </select>
+          </div>
+          <div class="mt-4">
+            <label for="tutor">Nome do tutor</label>
+            <input v-model="novaOperacao.tutor" class="form-control" id="tutor" type="text"
+              placeholder="Digite o nome do Tutor">
+          </div>
+          <div class="mt-4">
+            <label for="status">Qual o status do procedimento?</label>
+            <select id="status" v-model="novaOperacao.status" class="form-control">
+              <option value="Em andamento">Em andamento</option>
+              <option value="Finalizado">Finalizado</option>
+              <option value="Cancelado">Cancelado</option>
+            </select>
+          </div>
+          <div class="mt-4">
+            <label for="procedimento">Qual é o procedimento?</label>
+            <input v-model="novaOperacao.procedimento" class="form-control" id="procedimento" type="text"
+              placeholder="Procedimento">
+          </div>
+          <div class="form-floating mt-3 d-flex justify-content-center">
+            <button type="submit" class="mt-4" @click="registrarOp()">Inserir operações</button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="text-center my-5">
@@ -34,7 +39,7 @@
     </div>
     <div v-for="(o, index) in operacoes" :key="index">
       <div class="container">
-        <div class="row  d-flex justify-content-between">
+        <div class="row d-flex justify-content-between">
           <div class="col">
             <div class="form-control mb-3 p-3">
               <div>
@@ -121,11 +126,16 @@ export default {
         status: '',
         procedimento: '',
       },
+      pets: [],
     };
   },
 
   mounted() {
     this.carregarOperacoes();
+    axios.get('api/v1/pet')
+      .then(response => {
+        this.pets = response.data.data;
+      })
   },
 
   methods: {
@@ -224,4 +234,8 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.form-helpet {
+  min-width: 500px;
+}
+</style>

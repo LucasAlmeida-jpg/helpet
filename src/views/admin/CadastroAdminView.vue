@@ -110,7 +110,6 @@ export default {
       };
       axios.post('api/v1/pet', petData)
         .then(response => {
-          console.log(response);
           this.pet = response.data.data;
         })
         .catch(error => {

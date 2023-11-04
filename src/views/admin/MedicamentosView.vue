@@ -20,8 +20,12 @@
           </div>
           <div class="modal-body">
             <div>
-              <label for="med">Nome do Pet</label>
-              <input form-control id="med" v-model="novoMedicamento.petMedications">
+              <label for="med">Qual o Pet</label>
+              <!-- <input form-control id="med"> -->
+              <select name="med" v-model="novoMedicamento.petMedications">
+                <option value="" disabled selected>Selecione o Pet</option>
+                <option v-for="(pet, index) in pets" :value="pet.nome" :key="index">{{ pet.nome }}</option>
+              </select>
             </div>
             <div class="my-3">
               <label for="pet">Tipo de Pet</label>
@@ -80,6 +84,7 @@ export default {
         timeAplication: '',
         dosage: '',
       },
+      pets: [],
     };
   },
 
@@ -89,14 +94,19 @@ export default {
         this.medicamentos = response.data.data;
       })
       .catch(error => {
-        console.error('Erro ao buscar usuários:', error);
+        console.error('Erro ao buscar medicamentos:', error);
       });
+
+    axios.get('api/v1/pet')
+      .then(response => {
+        this.pets = response.data.data;
+      })
+
   },
 
   methods: {
 
     registrarMedicamento() {
-
       var medData = {
         nome_pet: this.novoMedicamento.petMedications,
         tipo_pet: this.novoMedicamento.petType,
@@ -107,6 +117,7 @@ export default {
       axios.post('api/v1/medicamento', medData)
         .then(response => {
           this.medicamentos = response.data.data;
+          window.location.reload();
         })
 
     }
