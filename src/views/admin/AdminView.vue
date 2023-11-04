@@ -13,7 +13,7 @@
       </div>
       <div class="col">
         <router-link to="/cadastroAdmin">
-          <h4>Cadastros</h4>
+          <h4>Cadastros de Pets</h4>
         </router-link>
       </div>
     </div>

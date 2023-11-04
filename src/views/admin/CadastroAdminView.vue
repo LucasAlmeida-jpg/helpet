@@ -6,7 +6,7 @@
       <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
         tabindex="0">
         <div class="text-center my-5">
-          <h1 class="sinais">Cadastros</h1>
+          <h1 class="sinais">Cadastros de PETS</h1>
           <img src="@/assets/logo_helpett.png" alt="">
         </div>
         <form class="mb-5">
