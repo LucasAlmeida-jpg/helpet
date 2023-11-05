@@ -15,11 +15,7 @@ class PetController extends Controller
     public function index()
     {
         $user = auth()->user();
-        
-        if($user->admin){
-            
-        }
-        
+              
         $pets = Pet::all(); // Recupera todos os pets
 
         return response()->json([
