@@ -58,8 +58,8 @@
                   <span v-if="!o.editing" :style="{
                     color: getStatusColor(o.status),
                     backgroundColor: getStatusBackgroundColor(o.status),
-                    borderRadius: '40px',
-                    padding: '4px 10px',
+                    borderRadius: '80px',
+                    padding: '4px 10px 7px 10px',
                     color: 'white'
                   }">{{ o.status }}</span>
                   <input v-if="o.editing" v-model="o.status" class="form-control" type="text">
