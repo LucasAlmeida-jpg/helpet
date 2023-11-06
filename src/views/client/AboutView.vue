@@ -1,12 +1,12 @@
 <template>
   <div class="container text-center mt-5">
     <div class="row">
-      <div class="col">
+      <div class="col arrow">
         <router-link to="/cadastros">
           <h4>Cadastros</h4>
         </router-link>
       </div>
-      <div class="col">
+      <div class="col arrow">
         <router-link to="/feedback">
           <h4>Deixar FeedBacks</h4>
         </router-link>
@@ -24,6 +24,21 @@
 h4 {
   text-transform: uppercase;
   font-size: 15px;
+}
+
+.arrow:after {
+  border-right: 0.2em solid white;
+  border-bottom: 0.2em solid white;
+  content: "";
+  display: inline-block;
+  height: .70em;
+  margin-top: -6px;
+  width: .70em;
+  margin-left: 10px;
+
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
 }
 
 .col {
