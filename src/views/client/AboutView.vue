@@ -26,6 +26,8 @@ h4 {
   font-size: 15px;
 }
 
+// text
+
 .arrow:after {
   border-right: 0.2em solid white;
   border-bottom: 0.2em solid white;
