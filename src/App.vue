@@ -35,11 +35,11 @@
             <label for="floatingInput">Endereço</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" v-model="email">
+            <input type="email" class="form-control" id="floatingInput">
             <label for="floatingInput">E-mail</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="floatingPassword" v-model="senha">
+            <input type="password" class="form-control" id="floatingPassword">
             <label for="floatingPassword">Senha</label>
           </div>
           <div class="form-floating mb-3">
@@ -67,17 +67,18 @@
         </div>
         <div class="modal-body">
           <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput">
+            <input type="email" class="form-control" id="floatingInput" v-model="emailClient">
             <label for="floatingInput">E-mail (Cliente)</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="floatingPassword">
+            <input type="password" class="form-control" id="floatingPassword" v-model="senhaClient">
             <label for="floatingPassword">Senha (Cliente)</label>
           </div>
+          <span v-if="errorLogin" class="text-danger">Senha Incorreta!</span>
         </div>
         <div class="modal-footer">
-          <router-link to="/client"><button type="button" class="" data-bs-dismiss="modal">Entrar</button></router-link>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Recuperar Senha</button>
+          <button type="button" @click="validateClient()">Entrar</button>
+          <button type=" button" class="btn btn-secondary" data-bs-dismiss="modal">Recuperar Senha</button>
         </div>
       </div>
     </div>
@@ -93,16 +94,17 @@
         </div>
         <div class="modal-body">
           <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput">
+            <input type="email" class="form-control" id="floatingInput" v-model="emailAdmin">
             <label for="floatingInput">E-mail</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="floatingPassword">
+            <input type="password" class="form-control" id="floatingPassword" v-model="senhaAdmin">
             <label for="floatingPassword">Senha</label>
           </div>
+          <span v-if="errorLogin" class="text-danger">Senha Incorreta!</span>
         </div>
         <div class="modal-footer">
-          <router-link to="/Admin"><button type="button" class="" data-bs-dismiss="modal">Entrar</button></router-link>
+          <button type="button" class="" data-bs-dismiss="modal" @click="validateAdmin()">Entrar</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Recuperar Senha</button>
         </div>
       </div>
@@ -118,6 +120,86 @@
   </footer> -->
 </template>
 
+<script>
+import axios from '@/axiosDefault';
+export default {
+  data() {
+    return {
+      user: '',
+      name: '',
+      cpf: '',
+      endereco: '',
+      email: '',
+      senha: '',
+      senhaClient: '',
+      emailClient: '',
+      errorLogin: false,
+      emailAdmin: '',
+      senhaAdmin: '',
+
+    };
+  },
+
+  methods: {
+    createUSer() {
+      var data = {
+        nome: this.name,
+        email: this.email,
+        password: this.senha,
+        cpf: this.cpf,
+        endereco: this.endereco,
+      }
+      axios.post('api/v1/user', data)
+        .then(response => {
+          this.user = response.data.data;
+          console.log(this.user, 'this.user');
+        })
+        .catch(error => {
+          console.error('Erro ao buscar usuários:', error);
+        });
+    },
+    async validateClient() {
+      try {
+        const dataUser = {
+          email: this.emailClient,
+          password: this.senhaClient,
+        };
+        const response = await axios.post('api/v1/login', dataUser);
+        this.user = response.data.data;
+
+        this.$router.push('/client');
+      } catch (error) {
+        this.errorLogin = true;
+        setTimeout(() => {
+          this.errorLogin = false;
+        }, 1000)
+      }
+    },
+
+    async validateAdmin() {
+      try {
+        const dataUser = {
+          email: this.emailAdmin,
+          password: this.senhaAdmin,
+        };
+        const response = await axios.post('api/v1/login', dataUser);
+        this.user = response.data.data;
+
+        this.$router.push('/admin');
+      } catch (error) {
+        this.errorLogin = true;
+        setTimeout(() => {
+          this.errorLogin = false;
+        }, 1000)
+      }
+    }
+
+
+
+
+  }
+};
+</script>
 
 <style lang="scss">
 .em-andamento {
@@ -208,41 +290,3 @@ select {
   padding: 10px;
 }
 </style>
-
-<script>
-import axios from '@/axiosDefault';
-export default {
-  data() {
-    return {
-      user: '',
-      name: '',
-      cpf: '',
-      endereco: '',
-      email: '',
-      senha: ''
-    };
-  },
-
-
-
-  methods: {
-    createUSer() {
-      var data = {
-        nome: this.name,
-        email: this.email,
-        password: this.senha,
-        cpf: this.cpf,
-        endereco: this.endereco,
-      }
-      axios.post('api/v1/user', data)
-        .then(response => {
-          this.user = response.data.data;
-          console.log(this.user);
-        })
-        .catch(error => {
-          console.error('Erro ao buscar usuários:', error);
-        });
-    }
-  }
-};
-</script>
