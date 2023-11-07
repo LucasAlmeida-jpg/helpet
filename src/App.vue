@@ -104,7 +104,7 @@
           <span v-if="errorLogin" class="text-danger">Senha Incorreta!</span>
         </div>
         <div class="modal-footer">
-          <button type="button" class="" data-bs-dismiss="modal" @click="validateAdmin()">Entrar</button>
+          <button type="button" class="" @click="validateAdmin()">Entrar</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Recuperar Senha</button>
         </div>
       </div>
