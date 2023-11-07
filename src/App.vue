@@ -35,15 +35,15 @@
             <label for="floatingInput">Endereço</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput">
+            <input type="email" class="form-control" id="floatingInput" v-model="email">
             <label for="floatingInput">E-mail</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="floatingPassword">
+            <input type="password" class="form-control" id="floatingPassword" v-model="senha">
             <label for="floatingPassword">Senha</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="floatingPassword">
+            <input type="password" class="form-control" id="floatingPassword" v-model="senha">
             <label for="floatingPassword">Confirmar senha</label>
           </div>
         </div>
