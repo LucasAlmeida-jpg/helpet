@@ -5,12 +5,16 @@
         <div><img class="helpet" src="../src/assets/logo_helpett.png" alt=""></div>
       </a>
       <div>
-        <button class="btn btn-secondary-account" data-bs-toggle="modal" data-bs-target="#createAccount">Não possui
-          conta?</button>
-        <!-- <button class="mx-3" data-bs-toggle="modal" data-bs-target="#loginClient">Cliente</button> -->
-        <button class="ms-3" data-bs-toggle="modal" data-bs-target="#loginAdmin">Login</button>
+        <button class="btn btn-secondary-account" data-bs-toggle="modal" data-bs-target="#createAccount"
+          v-if="!loggedIn.user">Não possui conta?</button>
+        <button class="ms-3" data-bs-toggle="modal" data-bs-target="#loginAdmin" v-if="!loggedIn.user">Login</button>
+        <div class="d-flex align-items-center">
+          <h6 class="welcome">{{ greetingMessage }}</h6>
+          <h6 class="welcome ms-5 btn btn-secondary-account" @click="logout" v-if="loggedIn.user">Log Out</h6>
+        </div>
       </div>
     </div>
+
   </nav>
 
   <div class="modal fade" id="createAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -57,33 +61,6 @@
     </div>
   </div>
 
-  <div class="modal fade" id="loginClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div>
-            <img class="logo" src="@/assets/logo_helpett.png" alt="Helpet Logo">
-          </div>
-        </div>
-        <div class="modal-body">
-          <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" v-model="emailClient">
-            <label for="floatingInput">E-mail (Cliente)</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="floatingPassword" v-model="senhaClient">
-            <label for="floatingPassword">Senha (Cliente)</label>
-          </div>
-          <span v-if="errorLogin" class="text-danger">Senha Incorreta!</span>
-        </div>
-        <div class="modal-footer">
-          <button type="button" @click="validateClient()">Entrar</button>
-          <button type=" button" class="btn btn-secondary" data-bs-dismiss="modal">Recuperar Senha</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="modal fade" id="loginAdmin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -110,14 +87,7 @@
       </div>
     </div>
   </div>
-
   <router-view />
-  <!-- 
-  <footer class="text-center">
-    <div class="container-fluid d-flex align-items-center justify-content-center">
-      <div><img src="../src/assets/logo_helpett.png" class="logo" alt=""></div>
-    </div>
-  </footer> -->
 </template>
 
 <script>
@@ -136,10 +106,18 @@ export default {
       errorLogin: false,
       emailAdmin: '',
       senhaAdmin: '',
-
+      loggedIn: {},
     };
   },
-
+  computed: {
+    greetingMessage() {
+      if (this.loggedIn.user && this.loggedIn.user.length > 0) {
+        return `Olá, ${this.loggedIn.user[0].nome}!`;
+      } else {
+        return '';
+      }
+    }
+  },
   methods: {
     createUSer() {
       var data = {
@@ -152,29 +130,10 @@ export default {
       axios.post('api/v1/user', data)
         .then(response => {
           this.user = response.data.data;
-          console.log(this.user, 'this.user');
         })
         .catch(error => {
           console.error('Erro ao buscar usuários:', error);
         });
-    },
-
-    async validateClient() {
-      try {
-        const dataUser = {
-          email: this.emailClient,
-          password: this.senhaClient,
-        };
-        const response = await axios.post('api/v1/login', dataUser);
-        this.user = response.data.data;
-
-        this.$router.push('/client');
-      } catch (error) {
-        this.errorLogin = true;
-        setTimeout(() => {
-          this.errorLogin = false;
-        }, 1000)
-      }
     },
 
     async validateAdmin() {
@@ -184,34 +143,47 @@ export default {
           password: this.senhaAdmin,
         };
         const response = await axios.post('api/v1/login', dataUser);
-        const loggedIn = response.data;
-        console.log(loggedIn.user, 'this.user')
 
-        if (loggedIn.user[0].admin) {
-          this.$router.push('/admin');
-        }
-        else {
-          this.$router.push('/client');
-        }
+        if (response.data.user && response.data.user.length > 0) {
+          this.loggedIn = response.data;
 
+          localStorage.setItem('loggedIn', JSON.stringify(this.loggedIn));
+
+          if (this.loggedIn.user[0].admin) {
+            this.$router.push('/admin');
+          } else {
+            this.$router.push('/client');
+          }
+        } else {
+          console.log('Usuário inválido na resposta da API');
+        }
       } catch (error) {
-        console.log(error)
         this.errorLogin = true;
         setTimeout(() => {
           this.errorLogin = false;
-        }, 1000)
+        }, 1000);
       }
+    },
+
+    logout() {
+      localStorage.removeItem('loggedIn');
+
+      this.$router.push('/');
     }
 
-
-
-
+  },
+  created() {
+    const savedLoginData = localStorage.getItem('loggedIn');
+    if (savedLoginData) {
+      this.loggedIn = JSON.parse(savedLoginData);
+    }
   }
 };
 </script>
 
 <style lang="scss">
-.em-andamento {
+.em-andamento,
+.welcome {
   color: #9757FF;
 
 }

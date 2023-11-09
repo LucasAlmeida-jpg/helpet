@@ -1,7 +1,6 @@
 <template>
   <div>
     <main class="container">
-      <h3 class="offset-top-20 my-4">Gerenciamento dos Sinais Vitais</h3>
       <div class="text-center my-5">
         <h1 class="sinais">Sinais vitais</h1>
         <img src="@/assets/logo_helpett.png" alt="">
@@ -81,7 +80,6 @@ export default {
 
       axios.post('api/v1/sinais', dataSign)
         .then(response => {
-          console.log(dataSign);
           this.sinais = response.data.data;
           this.sinalCadastro = true;
           setTimeout(() => {

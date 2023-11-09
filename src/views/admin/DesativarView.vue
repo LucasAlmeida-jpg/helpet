@@ -48,7 +48,6 @@ export default {
         axios.delete(`api/v1/user/${this.selectedUserId}`)
           .then(() => {
             this.loadUsers();
-            console.log('Usuário excluído com sucesso');
           })
       } else {
         console.error('Nenhum usuário selecionado para exclusão.');

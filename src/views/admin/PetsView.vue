@@ -34,7 +34,6 @@ export default {
     axios.get('api/v1/pet')
       .then(response => {
         this.pets = response.data.data;
-        console.log(this.pets);
       })
       .catch(error => {
         console.error('Erro ao buscar pets:', error);

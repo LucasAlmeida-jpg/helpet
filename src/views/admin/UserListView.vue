@@ -34,7 +34,6 @@ export default {
     axios.get('api/v1/user')
       .then(response => {
         this.users = response.data.data;
-        console.log(this.users);
       })
       .catch(error => {
         console.error('Erro ao buscar usuários:', error);
