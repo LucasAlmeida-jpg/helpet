@@ -9,8 +9,8 @@
       <div class="mb-4">
         <div class="card-body d-flex justify-content-center align-items-center">
           <div>
-            <label for="pet">Selecione o Pet:</label>
             <select class="form-control mb-4" name="pet" v-model="pet_name" id="pet">
+              <option value="" disabled selected>Selecione o Pet</option>
               <option v-for="(pet, index) in pets" :key="index">
                 {{ pet.nome }}
               </option>
@@ -158,7 +158,7 @@ span {
 }
 
 select {
-  /* border: none !important; */
-  font-size: 20px;
+  cursor: pointer;
+  padding: 14px;
 }
 </style>

@@ -1,21 +1,13 @@
 <template>
   <div class="container text-center mt-5">
     <div class="row">
-      <div class="col arrow">
-        <router-link to="/cadastros">
-          <h4>Cadastros</h4>
-        </router-link>
-      </div>
-      <div class="col arrow">
-        <router-link to="/feedback">
-          <h4>Deixar FeedBacks</h4>
-        </router-link>
-      </div>
-      <!-- <div class="col">
-        <router-link to="/pagamento">
-          <h4>Pagamento</h4>
-        </router-link>
-      </div> -->
+      <router-link to="/cadastros" class="col arrow">
+        <h4>Cadastros</h4>
+      </router-link>
+
+      <router-link to="/feedback" class="col arrow">
+        <h4>Deixar FeedBacks</h4>
+      </router-link>
     </div>
   </div>
 </template>

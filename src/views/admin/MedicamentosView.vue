@@ -22,26 +22,26 @@
             <div>
               <label for="med">Qual o Pet</label>
               <!-- <input form-control id="med"> -->
-              <select name="med" v-model="novoMedicamento.petMedications">
+              <select name="med" v-model="novoMedicamento.petMedications" class="form-control">
                 <option value="" disabled selected>Selecione o Pet</option>
                 <option v-for="(pet, index) in pets" :value="pet.nome" :key="index">{{ pet.nome }}</option>
               </select>
             </div>
             <div class="my-3">
               <label for="pet">Tipo de Pet</label>
-              <input form-control id="pet" v-model="novoMedicamento.petType">
+              <input class="form-control" id="pet" v-model="novoMedicamento.petType">
             </div>
 
             <div class="my-3">
               <label for="pet">Horário da Aplicação</label>
-              <input form-control type="time" id="pet" v-model="novoMedicamento.timeAplication">
+              <input class="form-control" type="time" id="pet" v-model="novoMedicamento.timeAplication">
             </div>
             <label for="medicamento">Nome do medicamento</label>
-            <input form-control id="medicamento" type="text" v-model="novoMedicamento.medicationName">
+            <input class="form-control" id="medicamento" type="text" v-model="novoMedicamento.medicationName">
 
             <div class="mt-3">
               <label for="name">Dosagem</label>
-              <input form-control id="name" type="text" v-model="novoMedicamento.dosage">
+              <input class="form-control" id="name" type="text" v-model="novoMedicamento.dosage">
             </div>
           </div>
           <div class="modal-footer">

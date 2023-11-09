@@ -21,12 +21,12 @@
           <div class="modal-body">
             <div>
               <label for="med">Tipo de cuidado</label>
-              <input id="med" v-model="novaHigiene.typeCare">
+              <input class="form-control" id="med" v-model="novaHigiene.typeCare">
             </div>
 
             <div class="my-3">
               <label for="pet">Nome de Pet</label>
-              <select name="pet" v-model="novaHigiene.petName">
+              <select class="form-control" name="pet" v-model="novaHigiene.petName">
                 <option value="" disabled selected>Selecione o Pet</option>
                 <option v-for="(pet, index) in pets" :value="pet.nome" :key="index">{{ pet.nome }}</option>
               </select>
@@ -34,19 +34,19 @@
 
             <div class="my-3">
               <label for="pet">Tipo de Pet</label>
-              <input id="pet" v-model="novaHigiene.petType">
+              <input class="form-control" id="pet" v-model="novaHigiene.petType">
             </div>
 
             <div class="my-3">
               <label for="pet">Qual foi a última vez que o pet fez o procedimento?</label>
-              <input id="pet" type="date" v-model="novaHigiene.actualTime">
+              <input class="form-control" id="pet" type="date" v-model="novaHigiene.actualTime">
             </div>
             <label for="medicamento">Data atual do procedimento</label>
-            <input id="medicamento" type="date" v-model="novaHigiene.lastTime">
+            <input class="form-control" id="medicamento" type="date" v-model="novaHigiene.lastTime">
 
             <div class="mt-3">
               <label for="name">Observacao</label>
-              <input id="name" type="text" v-model="novaHigiene.obs">
+              <input class="form-control" id="name" type="text" v-model="novaHigiene.obs">
             </div>
           </div>
           <div class="modal-footer">

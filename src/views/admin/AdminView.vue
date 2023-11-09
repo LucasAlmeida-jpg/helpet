@@ -1,55 +1,44 @@
 <template>
   <div class="container text-center mt-4">
     <div class="row">
-      <div class="col arrow">
-        <router-link to="/sinais">
-          <h4>Sinais Vitais</h4>
-        </router-link>
-      </div>
-      <div class="col arrow">
-        <router-link to="/medicamentos">
-          <h4>Registre Medicamentos dos Pets</h4>
-        </router-link>
-      </div>
-      <div class="col arrow">
-        <router-link to="/cadastroAdmin">
-          <h4>Cadastros de Pets</h4>
-        </router-link>
-      </div>
+      <router-link to="/sinais" class="col arrow">
+        <h4>Sinais Vitais</h4>
+      </router-link>
+
+      <router-link to="/medicamentos" class="col arrow">
+        <h4>Registre Medicamentos dos Pets</h4>
+      </router-link>
+
+      <router-link to="/cadastroAdmin" class="col arrow">
+        <h4>Cadastros de Pets</h4>
+      </router-link>
     </div>
     <div class="row">
-      <div class="col arrow">
-        <router-link to="/higieneAdmin">
-          <h4>Higiene dos Pets</h4>
-        </router-link>
-      </div>
-      <div class="col arrow">
-        <router-link to="/operacaoAdmin">
-          <h4>Inserir Operações</h4>
-        </router-link>
-      </div>
-      <div class="col arrow">
-        <router-link to="/desativar">
-          <h4>Desativar perfil de usuário</h4>
-        </router-link>
-      </div>
+      <router-link to="/higieneAdmin" class="col arrow">
+        <h4>Higiene dos Pets</h4>
+      </router-link>
+
+      <router-link to="/operacaoAdmin" class="col arrow">
+        <h4>Inserir Operações</h4>
+      </router-link>
+
+      <router-link to="/desativar" class="col arrow">
+        <h4>Desativar perfil de usuário</h4>
+      </router-link>
     </div>
+
     <div class="row">
-      <div class="col arrow">
-        <router-link to="/listUser">
-          <h4>Usuários Cadastrados</h4>
-        </router-link>
-      </div>
-      <div class="col arrow">
-        <router-link to="/pets">
-          <h4>Informações dos Pets</h4>
-        </router-link>
-      </div>
-      <div class="col arrow">
-        <router-link to="/feedbackAdmin">
-          <h4>FeedBack</h4>
-        </router-link>
-      </div>
+      <router-link to="/listUser" class="col arrow">
+        <h4>Usuários Cadastrados</h4>
+      </router-link>
+
+      <router-link to="/pets" class="col arrow">
+        <h4>Informações dos Pets</h4>
+      </router-link>
+
+      <router-link to="/feedbackAdmin" class="col arrow">
+        <h4>FeedBack</h4>
+      </router-link>
     </div>
   </div>
 </template>
