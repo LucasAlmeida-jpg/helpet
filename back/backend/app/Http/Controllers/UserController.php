@@ -12,7 +12,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::with('pets');
-        return response()->json($user->paginate('10'), 200);
+        return response()->json($user->paginate('10000'), 200);
     }
 
     /**

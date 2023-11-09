@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class AuthLoginController extends Controller
 {
@@ -15,8 +16,13 @@ class AuthLoginController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
+        if($token) {
+            $user = User::where("email", $request->email)->get();                   
+        }
+
         return response()->json([
-            'token' => $token
+            'token' => $token,
+            'user' => $user,
         ]);
     }
 

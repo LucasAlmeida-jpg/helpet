@@ -23,9 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('v1/login', [AuthLoginController::class, 'login']);
     
-// Route::middleware(['jwt.auth'])->group(function () {
-//     Route::resource('v1/pet', PetController::class);
-// });
+Route::middleware(['jwt.auth'])->group(function () {
+    Route::resource('v1/pet', PetController::class);
+});
 
 
 Route::resource('v1/higiene', HigieneController::class);

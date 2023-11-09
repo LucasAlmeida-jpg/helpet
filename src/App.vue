@@ -7,8 +7,8 @@
       <div>
         <button class="btn btn-secondary-account" data-bs-toggle="modal" data-bs-target="#createAccount">Não possui
           conta?</button>
-        <button class="mx-3" data-bs-toggle="modal" data-bs-target="#loginClient">Cliente</button>
-        <button data-bs-toggle="modal" data-bs-target="#loginAdmin">Admin</button>
+        <!-- <button class="mx-3" data-bs-toggle="modal" data-bs-target="#loginClient">Cliente</button> -->
+        <button class="ms-3" data-bs-toggle="modal" data-bs-target="#loginAdmin">Login</button>
       </div>
     </div>
   </nav>
@@ -158,6 +158,7 @@ export default {
           console.error('Erro ao buscar usuários:', error);
         });
     },
+
     async validateClient() {
       try {
         const dataUser = {
@@ -183,10 +184,18 @@ export default {
           password: this.senhaAdmin,
         };
         const response = await axios.post('api/v1/login', dataUser);
-        this.user = response.data.data;
+        const loggedIn = response.data;
+        console.log(loggedIn.user, 'this.user')
 
-        this.$router.push('/admin');
+        if (loggedIn.user[0].admin) {
+          this.$router.push('/admin');
+        }
+        else {
+          this.$router.push('/client');
+        }
+
       } catch (error) {
+        console.log(error)
         this.errorLogin = true;
         setTimeout(() => {
           this.errorLogin = false;
