@@ -14,7 +14,6 @@
         </div>
       </div>
     </div>
-
   </nav>
 
   <div class="modal fade" id="createAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

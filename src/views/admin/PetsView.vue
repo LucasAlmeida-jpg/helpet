@@ -1,8 +1,8 @@
 <template>
   <div class="text-center">
     <div class="container">
-      <div class="row row-cols-2 d-flex justify-content-between">
-        <div class="col-3 border card-pets" v-for="(u, index) in pets" :key="index">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-3 border card-pets" v-for="(u, index) in pets" :key="index">
           <div class="text-center">
             <img src="@/assets/pets.png" alt="">
           </div>
