@@ -1,9 +1,36 @@
 # helPet (Sistema de PetShop)
 
-## Project setup
+## Clone o repositório
 ```
-npm install
+git clone https://github.com/LucasAlmeida-jpg/helpet.git
 ```
+
+## Instale as dependencias usando composer
+```
+composer install
+```
+
+## Copie o exemplo env e mude a configuracao de acordo
+```
+cp .env.example .env
+```
+## Gere uma nova chave 
+```
+php artisan key:generate
+```
+
+## Instale a nova chave gerada
+
+```
+php artisan passport:install
+```
+
+## Rode as migrations
+```
+php artisan migrate
+```
+
+## Agora voce tem acesso ao server http://localhost:8080
 
 ### Compiles and hot-reloads for development
 ```
