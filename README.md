@@ -5,6 +5,20 @@
 git clone https://github.com/LucasAlmeida-jpg/helpet.git
 ```
 
+
+## Instale as dependencias
+```
+npm install
+```
+
+
+## Após isso, localize o backend
+```
+cd/back
+cd/backend
+```
+
+
 ## Instale as dependencias usando composer
 ```
 composer install
