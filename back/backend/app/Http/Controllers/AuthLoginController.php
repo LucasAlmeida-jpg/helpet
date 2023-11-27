@@ -7,9 +7,9 @@ use App\Models\User;
 
 class AuthLoginController extends Controller
 {
-    
     public function login(Request $request)
     {
+        dd($request->all(['email', 'password']));
         $credentials = $request->all(['email', 'password']); 
 
         if (! $token = auth('api')->attempt($credentials)) {
@@ -35,5 +35,4 @@ class AuthLoginController extends Controller
     {
         return response()->json(auth()->user());
     }
-
 }
