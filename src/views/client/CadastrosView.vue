@@ -10,7 +10,7 @@
           <input class="form-control" v-model="pet.sexo_pet" placeholder="Sexo do Pet">
           <input class="form-control" v-model="pet.raca" placeholder="Raca do Pet">
           <input class="form-control" v-model="pet.cor" placeholder="Cor do Pet">
-          <input class="form-control" v-model="pet.cpfTutor" placeholder="CPF do Tutor">
+          <input class="form-control" v-model="pet.cpfTutor" placeholder="CPF do Tutor" v-mask="['###.###.###-##']">
           <input class="form-control" v-model="pet.nomeTutor" placeholder="Nome do Tutor">
           <button @click.prevent="createPet()">Cadastrar</button> <br>
           <div class="text-center mt-3 color-default " v-if="cadastroBemSucedido">Pet cadastrado com sucesso!
@@ -23,8 +23,11 @@
 
 <script>
 import axios from '@/axiosDefault';
+import {mask} from 'vue-the-mask'
 
 export default {
+  directives: {mask},
+
   data() {
     return {
       pet: {

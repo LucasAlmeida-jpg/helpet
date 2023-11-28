@@ -30,8 +30,8 @@
             <label for="floatingInput">Nome</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" v-model="cpf">
-            <label for="floatingInput">CPF</label>
+            <input type="text" class="form-control" id="floatingInput" v-model="cpf"  v-mask="['###.###.###-##']">
+            <label for="floatingInput">CPF do Tutor</label>
           </div>
           <div class="form-floating mb-3">
             <input type="text" class="form-control" id="floatingInput" v-model="endereco">
@@ -81,7 +81,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="" @click="validateAdmin()">Entrar</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Recuperar Senha</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
         </div>
       </div>
     </div>
@@ -91,7 +91,10 @@
 
 <script>
 import axios from '@/axiosDefault';
+import {mask} from 'vue-the-mask'
+
 export default {
+  directives: {mask},
   data() {
     return {
       user: '',
@@ -142,6 +145,7 @@ export default {
           password: this.senhaAdmin,
         };
         const response = await axios.post('api/v1/login', dataUser);
+        console.log('Password:', this.senhaAdmin);
 
         if (response.data.user && response.data.user.length > 0) {
           this.loggedIn = response.data;

@@ -9,7 +9,6 @@ class AuthLoginController extends Controller
 {
     public function login(Request $request)
     {
-        dd($request->all(['email', 'password']));
         $credentials = $request->all(['email', 'password']); 
 
         if (! $token = auth('api')->attempt($credentials)) {
